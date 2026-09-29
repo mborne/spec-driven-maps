@@ -17,6 +17,10 @@
       max-height: calc(100vh - 60px); overflow-y: auto; box-sizing: border-box;
     }
     .panel h1 { font-size: 17px; margin: 0 0 2px; color: #5a0f33; }
+    .panel .wip {
+      display: inline-block; margin: 0 0 4px; padding: 1px 8px; border-radius: 10px;
+      background: #fff3cd; border: 1px solid #e0b000; color: #6b4e00; font-size: 11px; font-weight: 600;
+    }
     .panel .subtitle { font-size: 12px; margin: 0 0 8px; color: #444; }
     .panel h2 { font-size: 12px; margin: 10px 0 4px; text-transform: uppercase; letter-spacing: .04em; color: #555; }
     .legend { font-size: 12px; }
@@ -63,6 +67,7 @@
   <div id="map"></div>
   <div class="panel" id="panel">
     <button class="toggle" id="toggle" aria-expanded="true" aria-controls="details">Légende</button>
+    <p class="wip">🚧 En construction</p>
     <h1>Où sont les vignobles ?</h1>
     <p class="subtitle">La vigne en France métropolitaine, du pays à la parcelle</p>
     <div class="details" id="details">

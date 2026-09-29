@@ -1,6 +1,8 @@
 # vignobles
 
-Carte web de la **vigne en France métropolitaine**, du pays à la parcelle, pour répondre à la question « Où sont les vignobles ? » posée lors d'un atelier « Les cartes qu'il nous faut ».
+> 🚧 **En construction** : cette carte est une première version (V0), susceptible d'évoluer.
+
+Carte web de la **vigne en France métropolitaine**, du pays à la parcelle, pour répondre à la question « Où sont les vignobles ? » posée lors d'un atelier « Les cartes qu'il nous faut » de [La République des Cartes](https://www.republiquedescartes.fr/).
 
 ## La carte
 
