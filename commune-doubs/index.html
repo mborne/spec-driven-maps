@@ -34,6 +34,13 @@
     }
     .loading.error { color: #b10026; }
     .loading[hidden] { display: none; }
+    /* Mentions légales : centrées en bas de carte, séparées des attributions */
+    .mentions {
+      position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 1;
+      background: rgba(255, 255, 255, 0.85); padding: 2px 8px; border-radius: 4px;
+      font-size: 12px; white-space: nowrap;
+    }
+    .mentions a { color: #333; }
     .maplibregl-popup-content { font-size: 13px; }
     .maplibregl-popup-content h2 { font-size: 14px; margin: 0 0 4px; }
   </style>
@@ -45,6 +52,7 @@
     <p>Habitants par km² – population municipale Insee</p>
     <div class="legend" id="legend"></div>
   </div>
+  <div class="mentions"><a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
   <div class="loading" id="loading" role="status" aria-live="polite">Chargement des communes…</div>
   <script>
     // Classes de densité (hab/km²) et couleurs (rampe séquentielle YlOrRd)
@@ -63,12 +71,26 @@
       container: 'map',
       style: 'https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/gris.json',
       bounds: [5.69868, 46.5538, 7.06239, 47.57969],
-      fitBoundsOptions: { padding: 20 },
-      attributionControl: {
-        customAttribution: '<a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a>'
-      }
+      fitBoundsOptions: { padding: 20 }
     });
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    // Mentions légales : remontées au-dessus de l'attribution si elles la chevauchent
+    const mentions = document.querySelector('.mentions');
+    function placeMentions() {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (!attrib) return;
+      mentions.style.marginBottom = '';
+      const m = mentions.getBoundingClientRect();
+      const a = attrib.getBoundingClientRect();
+      const overlap = m.right > a.left && m.left < a.right && m.bottom > a.top && m.top < a.bottom;
+      if (overlap) mentions.style.marginBottom = `${Math.ceil(m.bottom - a.top) + 4}px`;
+    }
+    map.once('load', () => {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (attrib) new ResizeObserver(placeMentions).observe(attrib);
+    });
+    window.addEventListener('resize', placeMentions);
 
     // Indicateur de chargement des données communales (~0,5 Mo)
     const loading = document.getElementById('loading');

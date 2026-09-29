@@ -60,7 +60,7 @@ Opacité de remplissage 0,75, contours blancs de 0,5 px. Les couches sont insér
 - Fond : Plan IGN vecteur en niveaux de gris (style officiel `gris`), `https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/gris.json`. Le fond neutre ne concurrence pas la rampe de couleurs de la choroplèthe.
 - Vue initiale : emprise du Doubs `[5.699, 46.554, 7.062, 47.580]`.
 - Chargement : message « Chargement des communes… » centré sur la carte (`role="status"`), masqué à l'événement `sourcedata` de la source `communes` lorsque `isSourceLoaded` est vrai ; remplacé par un message d'échec sur l'événement `error` de cette source. Le GeoJSON pèse environ 0,5 Mo après simplification.
-- Mentions légales : lien vers `https://mborne.github.io/mentions-legales/` ajouté au contrôle d'attribution MapLibre (`attributionControl.customAttribution`), en bas à droite, aux côtés des sources.
+- Mentions légales : lien vers `https://mborne.github.io/mentions-legales/` dans un bloc distinct, centré en bas de carte (convention commune, voir le [README](../../README.md)). Les sources restent dans le contrôle d'attribution MapLibre, en bas à droite. Si l'attribution déployée chevauche les mentions (écran étroit), celles-ci sont remontées juste au-dessus.
 
 ## Hébergement
 

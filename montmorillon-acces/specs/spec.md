@@ -39,12 +39,13 @@ Visiteurs du festival (grand public, scolaires, professionnels de la géographie
 - [x] Une fiche présente le nom du festival, l'adresse et les dates (28 – 31 mai 2026).
 - [ ] Le bouton « Itinéraire » de la fiche ouvre l'application de navigation du smartphone (Android et iOS) avec le lieu en destination ; sur ordinateur, il ouvre un calculateur d'itinéraire web.
 - [x] Chaque gare ou parking propose aussi un bouton « Itinéraire ».
+- [x] Une seule popup est ouverte à la fois : ouvrir le détail d'un parking, de la gare ou du lieu (sur la carte ou depuis la fiche) ferme la popup précédente.
 - [x] Une légende distingue le lieu, la gare, les parkings et l'itinéraire piéton.
 - [x] La vue initiale montre à la fois le lieu, les parkings et la gare.
 - [x] La présentation est sobre : carte plein écran et fiche claire, dans la lignée de `commune-doubs`.
 - [x] La carte est utilisable sur smartphone : fiche lisible, boutons assez grands pour le doigt, carte non masquée par la fiche.
 - [x] Les sources sont attribuées (IGN, BD TOPO®, Géoplateforme).
-- [x] Un lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) figure en bas de carte.
+- [x] Un lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) est centré en bas de carte, séparé des attributions des sources ; sur mobile, il reste visible au-dessus de la fiche.
 - [x] La carte est un site statique publiable sur GitHub Pages (aucun serveur applicatif).
 
 ## Hors périmètre

@@ -26,7 +26,7 @@ Grand public et agents souhaitant une lecture rapide du peuplement du départeme
 - [x] Un message informe du chargement en cours des données communales, puis disparaît une fois les communes affichées (ou signale un échec).
 - [x] Un clic sur une commune affiche son nom, son code INSEE, sa population, sa superficie et sa densité.
 - [x] Les sources sont attribuées (IGN BD TOPO®, Insee).
-- [x] Un lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) couvrant `mborne.github.io` figure en bas de carte.
+- [x] Un lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) couvrant `mborne.github.io` est centré en bas de carte, séparé des attributions des sources.
 - [x] La carte est utilisable sur mobile.
 - [x] Les contours des communes sont simplifiés pour un affichage web rapide, sans trou ni chevauchement entre communes voisines.
 - [x] La carte est un site statique publiable sur GitHub Pages (aucun serveur applicatif).

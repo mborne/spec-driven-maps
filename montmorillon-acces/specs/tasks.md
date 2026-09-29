@@ -12,4 +12,6 @@
 - [x] Tester localement : `python3 -m http.server -d montmorillon-acces 8000`
 - [x] Vérifier les critères d'acceptation de `spec.md` (sauf ouverture réelle des applications de navigation)
 - [x] Rédiger `README.md` (carte, méthode, prompt équivalent)
+- [x] Centrer les mentions légales en bas de carte, séparées des attributions
+- [x] N'ouvrir qu'une popup à la fois
 - [ ] Publier sur GitHub Pages

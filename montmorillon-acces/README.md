@@ -17,7 +17,8 @@ Nouvelle version, conçue selon la méthode [spec-driven-maps](../README.md), de
 - Sur mobile, la fiche est en bas de l'écran et repliée par défaut (titre, dates, adresse, bouton) ; sur ordinateur, elle est affichée à gauche.
 - Fond Plan IGN vecteur (style standard), rendu MapLibre GL JS.
 - Sources : © IGN – BD TOPO® (`BDTOPO_V3:equipement_de_transport`), Géoplateforme (géocodage, itinéraire).
-- Lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) en bas de carte.
+- Une seule popup ouverte à la fois.
+- Lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) centré en bas de carte, séparé des attributions.
 
 ## Méthode
 
@@ -61,8 +62,9 @@ Rendu :
   et une légende.
 - Sur mobile, fiche en bas de l'écran, repliable, sans masquer la carte ; boutons assez grands
   pour le doigt.
-- Attribution des sources (© IGN – BD TOPO®, Géoplateforme) et lien vers les mentions légales :
-  https://mborne.github.io/mentions-legales/
+- Une seule popup ouverte à la fois (ouvrir un détail ferme le précédent).
+- Attribution des sources (© IGN – BD TOPO®, Géoplateforme) et, centré en bas de carte et séparé
+  des attributions, un lien vers les mentions légales : https://mborne.github.io/mentions-legales/
 ```
 
 ## Régénérer les données

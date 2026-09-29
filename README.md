@@ -14,6 +14,12 @@ L'idée consiste à expérimenter la méthode [Specification-Driven Development 
   - `plan.md` : **comment** (sources de données, traitements, symbologie, rendu) ;
   - `tasks.md` : les tâches de réalisation.
 
+## Conventions communes
+
+Toutes les cartes respectent les règles suivantes :
+
+- **Mentions légales** : un lien vers <https://mborne.github.io/mentions-legales/> est centré en bas de la carte, séparé des attributions des sources (qui restent dans le contrôle d'attribution MapLibre, en bas à droite).
+
 ## Cartes
 
 | Dossier | Description | Statut |

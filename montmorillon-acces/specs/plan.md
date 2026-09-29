@@ -82,7 +82,9 @@ Les données sont figées dans le dépôt : la carte ne dépend pas des services
   - iOS : `https://maps.apple.com/?daddr=<lat>,<lon>` (Plans) ;
   - Android : `geo:<lat>,<lon>?q=<lat>,<lon>(<libellé>)`, qui laisse choisir l'application (Google Maps, OsmAnd, Organic Maps…) ;
   - ordinateur ou repli : `https://www.google.com/maps/dir/?api=1&destination=<lat>,<lon>`.
-- Attribution : © IGN – BD TOPO®, Plan IGN, Géoplateforme (géocodage et itinéraire) ; lien vers les mentions légales dans `customAttribution`.
+- **Popups** : une seule popup à la fois. La page garde une référence à la popup ouverte et la ferme avant d'en ouvrir une autre, que l'ouverture vienne d'un marqueur ou de la liste de la fiche.
+- Attribution : © IGN – BD TOPO®, Plan IGN, Géoplateforme (géocodage et itinéraire), dans le contrôle d'attribution MapLibre.
+- Mentions légales : lien dans un bloc distinct, centré en bas de carte (convention commune, voir le [README](../../README.md)). Sur mobile, il est placé juste au-dessus de la fiche ; si l'attribution déployée le chevauche, il est remonté au-dessus d'elle.
 
 ## Hébergement
 

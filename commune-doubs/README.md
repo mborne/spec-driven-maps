@@ -11,7 +11,7 @@ C'est l'exemple de départ, volontairement simple, qui pose le cadre de [spec-dr
 - Un clic sur une commune affiche sa population, sa superficie et sa densité.
 - Fond Plan IGN vecteur en niveaux de gris, rendu MapLibre GL JS.
 - Sources : © IGN – BD TOPO® (`BDTOPO_V3:commune`), population municipale Insee.
-- Lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) en bas de carte.
+- Lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) centré en bas de carte, séparé des attributions.
 
 ## Méthode
 
@@ -50,8 +50,9 @@ Rendu :
 - Au clic sur une commune : nom, code INSEE, population, superficie, densité et année de recensement.
 - Un message « Chargement des communes… » pendant le chargement des données, et un message
   en cas d'échec.
-- Attribution des sources (© IGN – BD TOPO® / Insee, population municipale) et, en bas de carte,
-  un lien vers les mentions légales : https://mborne.github.io/mentions-legales/
+- Attribution des sources (© IGN – BD TOPO® / Insee, population municipale) et, centré en bas
+  de carte et séparé des attributions, un lien vers les mentions légales :
+  https://mborne.github.io/mentions-legales/
 - La carte doit être utilisable sur mobile.
 ```
 

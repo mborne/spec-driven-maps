@@ -75,6 +75,13 @@
       padding: 1px 7px; font-size: 12px; font-weight: 600; white-space: nowrap; pointer-events: none;
     }
 
+    /* Mentions légales : centrées en bas de carte, séparées des attributions */
+    .mentions {
+      position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 1;
+      background: rgba(255, 255, 255, 0.85); padding: 2px 8px; border-radius: 4px;
+      font-size: 12px; white-space: nowrap;
+    }
+    .mentions a { color: #333; }
     .maplibregl-popup-content { font-size: 13px; padding: 10px 12px; }
     .maplibregl-popup-content h3 { font-size: 14px; margin: 0 0 4px; padding-right: 14px; }
     .maplibregl-popup-content p { margin: 0 0 8px; }
@@ -105,6 +112,7 @@
       .fiche.repliee .details { display: none; }
       /* Laisse l'attribution visible au-dessus de la fiche */
       .maplibregl-ctrl-bottom-right { bottom: var(--hauteur-fiche, 0); }
+      .mentions { bottom: calc(var(--hauteur-fiche, 0px) + 6px); }
     }
   </style>
 </head>
@@ -134,6 +142,7 @@
     </div>
   </section>
 
+  <div class="mentions"><a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
   <div class="loading" id="loading" role="status" aria-live="polite">Chargement des données d'accès…</div>
 
   <script>
@@ -170,13 +179,27 @@
     const map = new maplibregl.Map({
       container: 'map',
       style: 'https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/standard.json',
-      bounds: [0.866055, 46.417496, 0.88078, 46.432732],
-      attributionControl: {
-        customAttribution: '<a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a>'
-      }
+      bounds: [0.866055, 46.417496, 0.88078, 46.432732]
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }), 'top-right');
+
+    // Mentions légales : remontées au-dessus de l'attribution si elles la chevauchent
+    const mentions = document.querySelector('.mentions');
+    function placeMentions() {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (!attrib) return;
+      mentions.style.marginBottom = '';
+      const m = mentions.getBoundingClientRect();
+      const a = attrib.getBoundingClientRect();
+      const overlap = m.right > a.left && m.left < a.right && m.bottom > a.top && m.top < a.bottom;
+      if (overlap) mentions.style.marginBottom = `${Math.ceil(m.bottom - a.top) + 4}px`;
+    }
+    map.once('load', () => {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (attrib) new ResizeObserver(placeMentions).observe(attrib);
+    });
+    window.addEventListener('resize', placeMentions);
 
     // Fiche repliable sur mobile ; la carte est recadrée pour ne pas être masquée
     const fiche = document.getElementById('fiche');
@@ -189,6 +212,7 @@
     }
     function updateFicheHeight() {
       document.documentElement.style.setProperty('--hauteur-fiche', mobile.matches ? `${fiche.offsetHeight}px` : '0px');
+      placeMentions();
     }
     poignee.addEventListener('click', () => {
       const repliee = fiche.classList.toggle('repliee');
@@ -202,13 +226,15 @@
         `<p>${formatDistance(p.distance_m)} à pied du festival (${p.duree_min} min)</p>`;
       return `<h3>${escapeHtml(p.nom)}</h3><p>${escapeHtml(p.adresse)}</p>${dist}`;
     }
+    let popup = null;  // une seule popup ouverte à la fois
     function openPopup(feature) {
+      popup?.remove();
       const [lon, lat] = feature.geometry.coordinates;
       const p = feature.properties;
       const content = document.createElement('div');
       content.innerHTML = popupHtml(p);
       content.appendChild(navigationButton(lon, lat, p.nom));
-      return new maplibregl.Popup({ offset: 16, maxWidth: '260px' })
+      popup = new maplibregl.Popup({ offset: 16, maxWidth: '260px' })
         .setLngLat([lon, lat]).setDOMContent(content).addTo(map);
     }
     function focus(feature) {
