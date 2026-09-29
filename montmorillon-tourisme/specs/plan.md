@@ -91,7 +91,7 @@ Sites officiels retenus :
 
 - Musée d'Art et d'Histoire : <https://www.montmorillon.fr/contacts/musee-de-france-dart-et-dhistoire-de-montmorillon-mahm/>
 - Musée de l'Amande et du Macaron : <https://www.museedumacaron.com/>
-- Office de tourisme Sud Vienne Poitou : <https://www.sudviennepoitou.com/>
+- Office de tourisme Sud Vienne Poitou, bureau de Montmorillon : <https://www.sudviennepoitou.com/toute-l-offre/office-de-tourisme-sud-vienne-poitou-3733478> (fiche du bureau, plutôt que l'accueil du site qui couvre tout le territoire)
 
 ## Symbologie
 
