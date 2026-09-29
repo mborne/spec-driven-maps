@@ -30,5 +30,6 @@ Toutes les cartes respectent les règles suivantes :
 | [montmorillon-acces](montmorillon-acces/) | Carte d'accès au Printemps des Cartes 2026 | réalisée |
 | [montmorillon-tourisme](montmorillon-tourisme/) | Carte touristique de Montmorillon ([#15](https://github.com/mborne/spec-driven-maps/issues/15)) | réalisée |
 | [montmorillon-bdtopo-3d](montmorillon-bdtopo-3d/) | Carte des bâtiments de Montmorillon en 3D ([#14](https://github.com/mborne/spec-driven-maps/issues/14)) | réalisée |
+| [vignobles](vignobles/) | Où sont les vignobles ? Densité de vignoble par commune et vignes de la BD TOPO | réalisée |
 
 Référence : <https://mborne.github.io/montmorillon/>

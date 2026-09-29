@@ -1,0 +1,14 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[0.4302,43.8393]},"properties":{"nom":"ARMAGNAC"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-0.3791,45.6995]},"properties":{"nom":"COGNAC"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[3.7811,43.4749]},"properties":{"nom":"VIN DOUX NATURELS"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[7.2709,47.9875]},"properties":{"nom":"ALSACE ET EST"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[4.8106,46.5134]},"properties":{"nom":"BOURGOGNE BEAUJOLAIS SAVOIE JURA"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[4.0032,48.9848]},"properties":{"nom":"CHAMPAGNE"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[2.8409,42.9937]},"properties":{"nom":"LANGUEDOC-ROUSSILLON"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[6.3217,43.3341]},"properties":{"nom":"PROVENCE-CORSE"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-0.2944,44.8163]},"properties":{"nom":"SUD-OUEST"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1.2563,44.3832]},"properties":{"nom":"TOULOUSE-PYRENEES"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1.5653,46.9339]},"properties":{"nom":"VAL DE LOIRE"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[4.9216,44.2448]},"properties":{"nom":"VALLEE DU RHÔNE"}}
+]}
