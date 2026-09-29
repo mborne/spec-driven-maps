@@ -47,7 +47,8 @@
     "categorie": "musees",
     "nom": "Musée d'Art et d'Histoire",
     "description": "Musée de France créé en 1936 : collections d'art et d'histoire locale.",
-    "source": "IGN – BD TOPO® (SURFACTI0000002012620301)",
+    "source": "IGN – BD TOPO® (SURFACTI0000002012620301) et recherche web",
+    "recherche_web": "lien vers le site officiel ; date de création",
     "adresse": "5 Avenue Pasteur",
     "site": "https://www.montmorillon.fr/contacts/musee-de-france-dart-et-dhistoire-de-montmorillon-mahm/"
    }
@@ -66,7 +67,8 @@
     "categorie": "musees",
     "nom": "Musée de l'Amande et du Macaron",
     "description": "Histoire de l'amande et du macaron de Montmorillon, présentée par la maison Rannou-Métivier.",
-    "source": "IGN – BD TOPO® (SURFACTI0000000223411911)",
+    "source": "IGN – BD TOPO® (SURFACTI0000000223411911) et recherche web",
+    "recherche_web": "lien vers le site officiel ; description",
     "adresse": "34 Boulevard de Strasbourg",
     "site": "https://www.museedumacaron.com/"
    }
@@ -85,7 +87,8 @@
     "categorie": "religieux",
     "nom": "Église Notre-Dame",
     "description": "Église romane dominant la Gartempe ; sa crypte Sainte-Catherine est ornée de peintures murales du XIIe siècle.",
-    "source": "IGN – BD TOPO® (SURFACTI0000000090133952)",
+    "source": "IGN – BD TOPO® (SURFACTI0000000090133952) et recherche web",
+    "recherche_web": "crypte Sainte-Catherine et ses peintures murales (ancienne carte)",
     "mh": "classé",
     "mh_reference": "PA00105545",
     "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105545",
@@ -128,7 +131,8 @@
     "categorie": "religieux",
     "nom": "Octogone",
     "description": "Chapelle funéraire romane à plan octogonal, avec un ossuaire au rez-de-chaussée et une chapelle à l'étage.",
-    "source": "IGN – BD TOPO® (SURFACTI0000000223411829)",
+    "source": "IGN – BD TOPO® (SURFACTI0000000223411829) et recherche web",
+    "recherche_web": "ossuaire et chapelle à l'étage (ancienne carte)",
     "mh": "classé",
     "mh_reference": "PA00105548",
     "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105548",
@@ -150,7 +154,8 @@
     "categorie": "religieux",
     "nom": "Chapelle Saint-Laurent",
     "description": "Chapelle de la Maison-Dieu, dont la façade et le clocher remontent au XIIe siècle.",
-    "source": "IGN – BD TOPO® (SURFACTI0000000090129986)",
+    "source": "IGN – BD TOPO® (SURFACTI0000000090129986) et recherche web",
+    "recherche_web": "façade et clocher du XIIe siècle (ancienne carte)",
     "mh": "inscrit",
     "mh_reference": "PA00105548",
     "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105548",
@@ -172,7 +177,8 @@
     "categorie": "monuments",
     "nom": "Maison-Dieu (ancien Hôtel-Dieu)",
     "description": "Ensemble fondé au XIe siècle pour accueillir pèlerins et malades : Octogone, chapelle Saint-Laurent, chauffoir et jardins.",
-    "source": "Culture – Mérimée (PA00105548)",
+    "source": "Culture – Mérimée (PA00105548) et recherche web",
+    "recherche_web": "fondation au XIe siècle, accueil des pèlerins et malades (ancienne carte)",
     "adresse": "4 Rue des Augustins",
     "mh": "classé et inscrit (partiellement)",
     "mh_reference": "PA00105548",
@@ -286,7 +292,8 @@
     "categorie": "monuments",
     "nom": "Vieux Pont",
     "description": "Pont médiéval sur la Gartempe, au pied de l'église Notre-Dame.",
-    "source": "IGN – BD TOPO® (CONSLINE0000000054298680)"
+    "source": "IGN – BD TOPO® (CONSLINE0000000054298680) et recherche web",
+    "recherche_web": "origine médiévale (ancienne carte)"
    }
   },
   {
@@ -303,7 +310,8 @@
     "categorie": "ecrit",
     "nom": "Cité de l'Écrit et des Métiers du Livre",
     "description": "Le quartier médiéval du Brouard, rénové et dédié aux métiers du livre : librairies, reliure, calligraphie, gravure.",
-    "source": "IGN – BD TOPO® (PAIHABIT0000002207067543)"
+    "source": "IGN – BD TOPO® (PAIHABIT0000002207067543) et recherche web",
+    "recherche_web": "métiers du livre représentés (ancienne carte)"
    }
   },
   {
@@ -337,7 +345,8 @@
     "categorie": "espaces",
     "nom": "Espace Camille Olivet",
     "description": "Jardins au bord de la Gartempe.",
-    "source": "Adresse géocodée (Géoplateforme)",
+    "source": "Adresse géocodée (Géoplateforme) et recherche web",
+    "recherche_web": "adresse et description (ancienne carte ; lieu absent des référentiels)",
     "adresse": "23 Avenue Fernand Tribot"
    }
   },
@@ -355,7 +364,8 @@
     "categorie": "espaces",
     "nom": "Square Alphonse Boudard",
     "description": "Square nommé en hommage à l'écrivain Alphonse Boudard.",
-    "source": "IGN – BD TOPO® (SURFACTI0000000315532392)"
+    "source": "IGN – BD TOPO® (SURFACTI0000000315532392) et recherche web",
+    "recherche_web": "hommage à l'écrivain (ancienne carte)"
    }
   },
   {
@@ -389,7 +399,8 @@
     "categorie": "services",
     "nom": "Office de tourisme",
     "description": "Accueil et documentation touristique de l'Office de tourisme Sud Vienne Poitou.",
-    "source": "IGN – BD TOPO® (SURFACTI0000000319021128)",
+    "source": "IGN – BD TOPO® (SURFACTI0000000319021128) et recherche web",
+    "recherche_web": "lien vers la fiche du bureau de Montmorillon",
     "adresse": "2 Place du Maréchal Leclerc",
     "site": "https://www.sudviennepoitou.com/toute-l-offre/office-de-tourisme-sud-vienne-poitou-3733478"
    }

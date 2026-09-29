@@ -1,5 +1,5 @@
 {
-  "commentaire": "Lieux de la carte touristique : références aux objets sources, sans coordonnées. Voir specs/plan.md.",
+  "commentaire": "Lieux de la carte touristique : références aux objets sources, sans coordonnées. Voir specs/plan.md. Le champ recherche_web indique ce qui, dans une fiche, provient d'une recherche web plutôt que des référentiels.",
   "emprise": {
     "centre": { "type": "BDTOPO_V3:zone_d_activite_ou_d_interet", "cleabs": "SURFACTI0000000319021128" },
     "rayon_m": 1000
@@ -19,7 +19,8 @@
       "nom": "Musée d'Art et d'Histoire",
       "source": { "type": "BDTOPO_V3:zone_d_activite_ou_d_interet", "cleabs": "SURFACTI0000002012620301" },
       "description": "Musée de France créé en 1936 : collections d'art et d'histoire locale.",
-      "site": "https://www.montmorillon.fr/contacts/musee-de-france-dart-et-dhistoire-de-montmorillon-mahm/"
+      "site": "https://www.montmorillon.fr/contacts/musee-de-france-dart-et-dhistoire-de-montmorillon-mahm/",
+      "recherche_web": "lien vers le site officiel ; date de création"
     },
     {
       "id": "musee-macaron",
@@ -27,7 +28,8 @@
       "nom": "Musée de l'Amande et du Macaron",
       "source": { "type": "BDTOPO_V3:zone_d_activite_ou_d_interet", "cleabs": "SURFACTI0000000223411911" },
       "description": "Histoire de l'amande et du macaron de Montmorillon, présentée par la maison Rannou-Métivier.",
-      "site": "https://www.museedumacaron.com/"
+      "site": "https://www.museedumacaron.com/",
+      "recherche_web": "lien vers le site officiel ; description"
     },
     {
       "id": "notre-dame",
@@ -35,7 +37,8 @@
       "nom": "Église Notre-Dame",
       "source": { "type": "BDTOPO_V3:zone_d_activite_ou_d_interet", "cleabs": "SURFACTI0000000090133952" },
       "merimee": "PA00105545",
-      "description": "Église romane dominant la Gartempe ; sa crypte Sainte-Catherine est ornée de peintures murales du XIIe siècle."
+      "description": "Église romane dominant la Gartempe ; sa crypte Sainte-Catherine est ornée de peintures murales du XIIe siècle.",
+      "recherche_web": "crypte Sainte-Catherine et ses peintures murales (ancienne carte)"
     },
     {
       "id": "saint-martial",
@@ -53,7 +56,8 @@
       "merimee": "PA00105548",
       "protection": "classé",
       "partie": "Chapelle octogonale de l'ancien Hôtel-Dieu, classée en 1840",
-      "description": "Chapelle funéraire romane à plan octogonal, avec un ossuaire au rez-de-chaussée et une chapelle à l'étage."
+      "description": "Chapelle funéraire romane à plan octogonal, avec un ossuaire au rez-de-chaussée et une chapelle à l'étage.",
+      "recherche_web": "ossuaire et chapelle à l'étage (ancienne carte)"
     },
     {
       "id": "saint-laurent",
@@ -63,7 +67,8 @@
       "merimee": "PA00105548",
       "protection": "inscrit",
       "partie": "Chapelle de l'ancien Hôtel-Dieu, inscrite en 1930",
-      "description": "Chapelle de la Maison-Dieu, dont la façade et le clocher remontent au XIIe siècle."
+      "description": "Chapelle de la Maison-Dieu, dont la façade et le clocher remontent au XIIe siècle.",
+      "recherche_web": "façade et clocher du XIIe siècle (ancienne carte)"
     },
     {
       "id": "maison-dieu",
@@ -71,7 +76,8 @@
       "nom": "Maison-Dieu (ancien Hôtel-Dieu)",
       "source": { "type": "merimee", "reference": "PA00105548" },
       "merimee": "PA00105548",
-      "description": "Ensemble fondé au XIe siècle pour accueillir pèlerins et malades : Octogone, chapelle Saint-Laurent, chauffoir et jardins."
+      "description": "Ensemble fondé au XIe siècle pour accueillir pèlerins et malades : Octogone, chapelle Saint-Laurent, chauffoir et jardins.",
+      "recherche_web": "fondation au XIe siècle, accueil des pèlerins et malades (ancienne carte)"
     },
     {
       "id": "hotel-moussac",
@@ -110,14 +116,16 @@
       "categorie": "monuments",
       "nom": "Vieux Pont",
       "source": { "type": "BDTOPO_V3:construction_lineaire", "cleabs": "CONSLINE0000000054298680" },
-      "description": "Pont médiéval sur la Gartempe, au pied de l'église Notre-Dame."
+      "description": "Pont médiéval sur la Gartempe, au pied de l'église Notre-Dame.",
+      "recherche_web": "origine médiévale (ancienne carte)"
     },
     {
       "id": "cite-ecrit",
       "categorie": "ecrit",
       "nom": "Cité de l'Écrit et des Métiers du Livre",
       "source": { "type": "BDTOPO_V3:zone_d_habitation", "cleabs": "PAIHABIT0000002207067543" },
-      "description": "Le quartier médiéval du Brouard, rénové et dédié aux métiers du livre : librairies, reliure, calligraphie, gravure."
+      "description": "Le quartier médiéval du Brouard, rénové et dédié aux métiers du livre : librairies, reliure, calligraphie, gravure.",
+      "recherche_web": "métiers du livre représentés (ancienne carte)"
     },
     {
       "id": "prairie-seminaire",
@@ -131,14 +139,16 @@
       "categorie": "espaces",
       "nom": "Espace Camille Olivet",
       "source": { "type": "adresse", "q": "23 avenue Fernand Tribot 86500 Montmorillon" },
-      "description": "Jardins au bord de la Gartempe."
+      "description": "Jardins au bord de la Gartempe.",
+      "recherche_web": "adresse et description (ancienne carte ; lieu absent des référentiels)"
     },
     {
       "id": "square-boudard",
       "categorie": "espaces",
       "nom": "Square Alphonse Boudard",
       "source": { "type": "BDTOPO_V3:zone_d_activite_ou_d_interet", "cleabs": "SURFACTI0000000315532392" },
-      "description": "Square nommé en hommage à l'écrivain Alphonse Boudard."
+      "description": "Square nommé en hommage à l'écrivain Alphonse Boudard.",
+      "recherche_web": "hommage à l'écrivain (ancienne carte)"
     },
     {
       "id": "square-medina",
@@ -153,7 +163,8 @@
       "nom": "Office de tourisme",
       "source": { "type": "BDTOPO_V3:zone_d_activite_ou_d_interet", "cleabs": "SURFACTI0000000319021128" },
       "description": "Accueil et documentation touristique de l'Office de tourisme Sud Vienne Poitou.",
-      "site": "https://www.sudviennepoitou.com/toute-l-offre/office-de-tourisme-sud-vienne-poitou-3733478"
+      "site": "https://www.sudviennepoitou.com/toute-l-offre/office-de-tourisme-sud-vienne-poitou-3733478",
+      "recherche_web": "lien vers la fiche du bureau de Montmorillon"
     }
   ]
 }

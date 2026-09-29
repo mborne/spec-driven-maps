@@ -85,7 +85,28 @@ Les lieux positionnés par Mérimée sont la Maison-Dieu, les hôtels de Moussac
 | Adresse | `adresse_postale` BD TOPO, adresse Mérimée ou adresse géocodée, si disponible |
 | Monument historique | Mérimée : protection et siècle, lien vers la notice POP |
 | Horaires et informations | `lieux.json` (`site`) : musées et office de tourisme uniquement, liens vérifiés le 29/09/2026 |
-| Source | générée : « IGN – BD TOPO® (cleabs) », « Culture – Mérimée (référence) » ou « Adresse géocodée (Géoplateforme) » |
+| Source | générée : « IGN – BD TOPO® (cleabs) », « Culture – Mérimée (référence) » ou « Adresse géocodée (Géoplateforme) », suivie de « et recherche web » quand `lieux.json` renseigne `recherche_web` |
+
+**Recherche web** : dans `lieux.json`, le champ `recherche_web` indique ce qui, dans une fiche, ne vient pas des référentiels. Il y en a deux sortes :
+
+- les liens vers les sites officiels, trouvés par recherche web ;
+- les éléments de description repris de l'ancienne carte, elle-même alimentée par le web (dates de fondation, détails architecturaux, adresse de l'Espace Camille Olivet).
+
+La fiche affiche alors « Source : … et recherche web ». Les descriptions tirées de Mérimée (siècle, précision de la protection) ou de la BD TOPO ne sont pas concernées.
+
+| Lieu | Information issue de la recherche web |
+|---|---|
+| Musée d'Art et d'Histoire | lien vers le site officiel ; date de création (1936) |
+| Musée de l'Amande et du Macaron | lien vers le site officiel ; description |
+| Office de tourisme | lien vers la fiche du bureau de Montmorillon |
+| Église Notre-Dame | crypte Sainte-Catherine et ses peintures murales |
+| Octogone | ossuaire et chapelle à l'étage |
+| Chapelle Saint-Laurent | façade et clocher du XIIe siècle |
+| Maison-Dieu | fondation au XIe siècle, accueil des pèlerins et malades |
+| Vieux Pont | origine médiévale |
+| Cité de l'Écrit | métiers du livre représentés |
+| Espace Camille Olivet | adresse et description (absent des référentiels) |
+| Square Alphonse Boudard | hommage à l'écrivain |
 
 Sites officiels retenus :
 

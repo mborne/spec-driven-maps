@@ -191,6 +191,9 @@ def main():
             coords = centroid(feature["geometry"])
             adresse = normalize_address(feature["properties"].get("adresse_postale"))
             props["source"] = f"IGN – BD TOPO® ({source['cleabs']})"
+        if lieu.get("recherche_web"):
+            props["source"] += " et recherche web"
+            props["recherche_web"] = lieu["recherche_web"]
         if adresse:
             props["adresse"] = adresse
         if lieu.get("site"):

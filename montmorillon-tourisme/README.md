@@ -14,7 +14,7 @@ Nouvelle version, conçue selon la méthode [spec-driven-maps](../README.md), de
   - espaces et promenades ;
   - office de tourisme.
 - Les **7 monuments historiques** du centre-ville recensés dans la base Mérimée, avec un badge « MH », leur protection (classé / inscrit) et un lien vers la notice. L'Octogone et la chapelle Saint-Laurent sont rattachés à la notice de l'ancien Hôtel-Dieu.
-- Chaque fiche indique la **source** de la donnée : objet BD TOPO, notice Mérimée ou adresse géocodée.
+- Chaque fiche indique la **source** de la donnée : objet BD TOPO, notice Mérimée ou adresse géocodée. La mention « et recherche web » signale les fiches qui contiennent un lien ou un élément de description trouvé sur le web ; le champ `recherche_web` de `scripts/lieux.json` précise lequel.
 - Un lien « Horaires et informations » vers le site officiel des musées et de l'office de tourisme ; aucun horaire n'est recopié dans la carte.
 - La **Gartempe**, tracée d'après la BD TOPO.
 - Fond Plan IGN vecteur teinté sépia et habillage « parchemin » (polices Cinzel, Playfair Display, Crimson Text), repris de l'ancienne version. Rendu MapLibre GL JS.
@@ -59,6 +59,8 @@ espaces et promenades, office de tourisme.
 - La Gartempe d'après BDTOPO_V3:troncon_hydrographique.
 - Pas de restauration, d'hébergement, d'horaires ni d'avis ; un lien vers le site officiel des musées
   et de l'office de tourisme.
+- Quand une fiche contient une information issue d'une recherche web (lien, complément de description),
+  sa source le précise : « Source : IGN – BD TOPO® et recherche web ».
 - Un script Python produit un GeoJSON versionné ; la page ne contient aucune donnée.
 
 Rendu :

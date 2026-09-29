@@ -160,7 +160,8 @@
       <div class="sources">
         <strong>Sources</strong><br>
         Lieux : IGN – BD TOPO® ; monuments historiques : ministère de la Culture – base Mérimée ;
-        adresse géocodée : Géoplateforme. Centre-ville : 1 km autour de l'office de tourisme.
+        adresse géocodée : Géoplateforme ; liens et compléments de description : recherche web (indiqué sur chaque fiche).
+        Centre-ville : 1 km autour de l'office de tourisme.
       </div>
     </div>
   </aside>
@@ -247,7 +248,7 @@
         <p>${escapeHtml(p.description)}</p>
         ${p.adresse ? `<p class="info">📍 ${escapeHtml(p.adresse)}</p>` : ''}
         ${p.site ? `<p class="info"><a href="${p.site}" target="_blank" rel="noopener">Horaires et informations ↗</a></p>` : ''}
-        <div class="source">Source : ${escapeHtml(p.source)}</div>
+        <div class="source"${p.recherche_web ? ` title="Recherche web : ${escapeHtml(p.recherche_web)}"` : ''}>Source : ${escapeHtml(p.source)}</div>
       </div>`;
     }
     function focusLieu(f) {

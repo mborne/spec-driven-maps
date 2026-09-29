@@ -46,6 +46,7 @@ Pour chaque lieu : nom, catégorie, adresse lorsqu'elle est connue, courte descr
 - [x] Chaque monument historique recensé dans Mérimée dans l'emprise du centre-ville est affiché, avec son statut (classé / inscrit) et un lien vers sa notice.
 - [x] Un lieu n'a le badge « MH » que s'il correspond à une notice Mérimée.
 - [x] Chaque fiche indique la source de la donnée.
+- [x] Quand une fiche contient une information issue d'une recherche web (lien vers le site officiel, élément de description repris de l'ancienne carte), sa source le précise : « Source : IGN – BD TOPO® et recherche web ».
 - [x] Aucun horaire n'est affiché ; les fiches des musées et de l'office de tourisme renvoient vers leur site officiel quand il existe.
 - [x] La Gartempe et la Cité de l'Écrit proviennent de données de référence, pas d'un tracé manuel.
 - [x] Une légende présente les catégories et le badge « MH ».

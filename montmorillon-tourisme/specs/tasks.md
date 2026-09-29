@@ -13,4 +13,5 @@
 - [x] Constater l'absence d'emprise de référence pour la Cité de l'Écrit et l'acter dans `spec.md` et `plan.md`
 - [x] Rédiger `README.md` (carte, méthode, prompt équivalent)
 - [x] Mettre à jour le README racine
+- [x] Signaler « et recherche web » dans la source des fiches concernées (champ `recherche_web`)
 - [x] Mettre à jour l'issue #15 et ouvrir la [PR #16](https://github.com/mborne/spec-driven-maps/pull/16)
