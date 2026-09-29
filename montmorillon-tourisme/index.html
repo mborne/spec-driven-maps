@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Montmorillon – Carte touristique</title>
+  <meta name="description" content="Carte touristique du centre-ville de Montmorillon : musées, patrimoine, Cité de l'Écrit, espaces et office de tourisme, d'après la BD TOPO et la base Mérimée.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css">
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <style>
+    :root {
+      --parchment: #f5edd6;
+      --parchment-dark: #e8d9b8;
+      --ink: #2c1f0f;
+      --ink-light: #5c3d1e;
+      --gold: #b8860b;
+      --red-seal: #8b1a1a;
+      --blue-river: #4a6fa5;
+      --entete: 58px;
+      --panneau: 320px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font-family: 'Crimson Text', Georgia, serif; color: var(--ink); background: var(--parchment); }
+
+    /* Fond Plan IGN teinté parchemin (les marqueurs HTML ne sont pas concernés) */
+    #map { position: absolute; top: var(--entete); left: 0; right: var(--panneau); bottom: 0; }
+    #map .maplibregl-canvas, .trait-riviere { filter: sepia(0.55) saturate(0.7) brightness(1.03); }
+
+    /* En-tête (ordinateur) */
+    .entete {
+      position: absolute; top: 0; left: 0; right: 0; height: var(--entete); z-index: 2;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--parchment) 100%);
+      border-bottom: 3px double var(--gold);
+    }
+    .entete h1, .panneau .titre { font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 0.08em; margin: 0; }
+    .entete h1 { font-size: 26px; }
+    .ornement { color: var(--gold); }
+    .sous-titre { font-family: 'Playfair Display', serif; font-style: italic; color: var(--ink-light); font-size: 15px; }
+
+    /* Panneau : latéral sur ordinateur, fiche en bas sur mobile */
+    .panneau {
+      position: absolute; top: var(--entete); right: 0; bottom: 0; width: var(--panneau); z-index: 2;
+      overflow-y: auto; padding: 14px 16px 20px;
+      background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--parchment) 40%);
+      border-left: 2px solid var(--gold);
+    }
+    .panneau .titre, .panneau .sous-titre, .poignee { display: none; }
+    .panneau h2 {
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+      color: var(--ink-light); margin: 16px 0 6px; padding-left: 8px; border-left: 2px solid var(--gold);
+    }
+    .panneau h2:first-of-type { margin-top: 4px; }
+    .panneau ul { list-style: none; margin: 0; padding: 0; }
+    .lieu {
+      display: flex; align-items: flex-start; gap: 8px; width: 100%; min-height: 40px; padding: 6px 4px;
+      background: none; border: 0; border-bottom: 1px solid rgba(184, 134, 11, 0.15); border-radius: 3px;
+      font: inherit; color: inherit; text-align: left; cursor: pointer;
+    }
+    .lieu:hover, .lieu:focus-visible { background: rgba(184, 134, 11, 0.1); }
+    .lieu .nom { font-size: 15px; line-height: 1.25; }
+    .lieu .detail { display: block; font-size: 12.5px; font-style: italic; color: var(--ink-light); }
+
+    .legende { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 10px; font-size: 14px; }
+    .legende div { display: flex; align-items: center; gap: 7px; }
+    .trait-riviere { display: inline-block; width: 26px; height: 3px; background: var(--blue-river); border-radius: 2px; flex: none; }
+    .sources { margin-top: 16px; padding: 8px 10px; font-size: 12.5px; line-height: 1.45; color: var(--ink-light);
+      background: rgba(184, 134, 11, 0.07); border: 1px solid rgba(184, 134, 11, 0.25); border-radius: 4px; }
+    .sources strong { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.05em; color: var(--gold); }
+
+    /* Pictogrammes : pastille ronde cerclée de parchemin, sceau « MH » */
+    .picto {
+      position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none;
+      width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--parchment);
+      font-size: 12px; line-height: 1; box-shadow: 0 1px 3px rgba(44, 31, 15, 0.45);
+    }
+    /* Marqueurs : garder le positionnement absolu de MapLibre (.picto est en relative) */
+    .maplibregl-marker.marker { position: absolute; width: 32px; height: 32px; font-size: 16px; padding: 0; cursor: pointer; }
+    .mh {
+      display: inline-block; font-family: 'Cinzel', serif; font-size: 9px; font-weight: 600; letter-spacing: 0.04em;
+      background: var(--red-seal); color: #fff; padding: 1px 4px; border-radius: 2px; vertical-align: middle;
+    }
+    .marker .mh { position: absolute; top: -7px; right: -12px; border: 1px solid var(--parchment); }
+
+    /* Popups */
+    .maplibregl-popup-content {
+      background: var(--parchment); border: 2px solid var(--gold); border-radius: 4px; padding: 10px 14px 10px 12px;
+      box-shadow: 4px 4px 12px rgba(44, 31, 15, 0.25); font-family: 'Crimson Text', Georgia, serif; font-size: 14px; color: var(--ink);
+    }
+    .maplibregl-popup-tip { border-top-color: var(--gold) !important; border-bottom-color: var(--gold) !important; }
+    .maplibregl-popup-close-button { font-size: 18px; color: var(--ink-light); }
+    .popup h3 { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; margin: 0 16px 2px 0; line-height: 1.3; }
+    .popup .cat { display: block; font-style: italic; color: var(--gold); font-size: 13px; margin-bottom: 4px; }
+    .popup p { margin: 4px 0; line-height: 1.4; }
+    .popup .info { font-size: 13px; color: var(--ink-light); }
+    .popup a { color: var(--blue-river); }
+    .popup .source { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.04em; color: var(--gold); margin-top: 6px; }
+
+    /* Pied de carte (GitHub / Mentions légales) : centré en bas, séparé des attributions */
+    .mentions {
+      position: absolute; left: calc((100% - var(--panneau)) / 2); bottom: 6px; transform: translateX(-50%); z-index: 1;
+      background: rgba(245, 237, 214, 0.9); padding: 2px 8px; border-radius: 4px;
+      font-size: 13px; white-space: nowrap; color: var(--ink-light);
+    }
+    .mentions a { color: var(--ink); }
+
+    .loading {
+      position: absolute; top: 50%; left: calc((100% - var(--panneau)) / 2); transform: translate(-50%, -50%); z-index: 3;
+      background: var(--parchment); border: 1px solid var(--gold); padding: 8px 14px; border-radius: 4px; font-size: 15px;
+    }
+    .loading.error { color: var(--red-seal); }
+    .loading[hidden] { display: none; }
+
+    @media (max-width: 700px) {
+      :root { --entete: 0px; --panneau: 0px; }
+      .entete { display: none; }
+      .panneau {
+        top: auto; left: 0; bottom: 0; width: auto; max-height: 55%;
+        border-left: 0; border-top: 3px double var(--gold); border-radius: 12px 12px 0 0; padding: 2px 16px 12px;
+        box-shadow: 0 -2px 10px rgba(44, 31, 15, 0.25);
+      }
+      .panneau .titre { display: block; font-size: 20px; text-align: center; }
+      .panneau .sous-titre { display: block; text-align: center; font-size: 14px; }
+      .poignee {
+        display: block; width: 100%; background: none; border: 0; cursor: pointer; padding: 0 0 4px;
+        font: 13px 'Crimson Text', Georgia, serif; font-style: italic; color: var(--ink-light);
+      }
+      .poignee::before { content: ''; display: block; margin: 8px auto 4px; width: 40px; height: 5px; border-radius: 3px; background: var(--parchment-dark); }
+      .poignee::after { content: 'Masquer les lieux et la légende'; }
+      .panneau.replie .poignee::after { content: 'Afficher les lieux et la légende'; }
+      .panneau.replie .details { display: none; }
+      .maplibregl-ctrl-bottom-right, .maplibregl-ctrl-bottom-left { bottom: var(--hauteur-fiche, 0); }
+      .mentions { left: 50%; bottom: calc(var(--hauteur-fiche, 0px) + 6px); }
+      .loading { left: 50%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <span class="ornement">✦</span>
+    <h1>Montmorillon</h1>
+    <span class="sous-titre">Cité de l'Écrit &amp; patrimoine roman</span>
+    <span class="ornement">✦</span>
+  </header>
+
+  <div id="map"></div>
+
+  <aside class="panneau replie" id="panneau" aria-label="Lieux et légende">
+    <button class="poignee" id="poignee" aria-expanded="false" aria-controls="details"></button>
+    <p class="titre">Montmorillon</p>
+    <p class="sous-titre">Cité de l'Écrit &amp; patrimoine roman</p>
+    <div class="details" id="details">
+      <div id="liste"></div>
+      <h2>Légende</h2>
+      <div class="legende" id="legende"></div>
+      <div class="sources">
+        <strong>Sources</strong><br>
+        Lieux : IGN – BD TOPO® ; monuments historiques : ministère de la Culture – base Mérimée ;
+        adresse géocodée : Géoplateforme ; liens et compléments de description : recherche web (indiqué sur chaque fiche).
+        Centre-ville : 1 km autour de l'office de tourisme.
+      </div>
+    </div>
+  </aside>
+
+  <div class="mentions"><a href="https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-tourisme#readme" target="_blank" rel="noopener">GitHub</a> / <a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
+  <div class="loading" id="loading" role="status" aria-live="polite">Chargement des lieux…</div>
+
+  <script>
+    const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/standard.json',
+      center: [0.8681, 46.4254],
+      zoom: 15
+    });
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-left');
+    map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
+
+    // Pied de carte : remonté au-dessus de l'attribution s'il la chevauche
+    const mentions = document.querySelector('.mentions');
+    function placeMentions() {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (!attrib) return;
+      mentions.style.marginBottom = '';
+      const m = mentions.getBoundingClientRect();
+      const a = attrib.getBoundingClientRect();
+      const overlap = m.right > a.left && m.left < a.right && m.bottom > a.top && m.top < a.bottom;
+      if (overlap) mentions.style.marginBottom = `${Math.ceil(m.bottom - a.top) + 4}px`;
+    }
+    map.once('load', () => {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (attrib) new ResizeObserver(placeMentions).observe(attrib);
+    });
+    window.addEventListener('resize', placeMentions);
+
+    // Panneau : ouvert sur ordinateur, fiche repliable sur mobile
+    const panneau = document.getElementById('panneau');
+    const poignee = document.getElementById('poignee');
+    const mobile = window.matchMedia('(max-width: 700px)');
+    if (!mobile.matches) { panneau.classList.remove('replie'); poignee.setAttribute('aria-expanded', 'true'); }
+    function setReplie(replie) {
+      panneau.classList.toggle('replie', replie);
+      poignee.setAttribute('aria-expanded', String(!replie));
+      updateHauteurFiche();
+    }
+    function updateHauteurFiche() {
+      document.documentElement.style.setProperty('--hauteur-fiche', mobile.matches ? `${panneau.offsetHeight}px` : '0px');
+      placeMentions();
+    }
+    poignee.addEventListener('click', () => setReplie(!panneau.classList.contains('replie')));
+    new ResizeObserver(updateHauteurFiche).observe(panneau);
+    function padding() {
+      return mobile.matches
+        ? { top: 50, right: 50, left: 30, bottom: panneau.offsetHeight + 40 }
+        : { top: 40, right: 40, bottom: 40, left: 60 };
+    }
+
+    // Une seule popup ouverte à la fois
+    let popup = null;
+    function showPopup(lngLat, html) {
+      popup?.remove();
+      popup = new maplibregl.Popup({ offset: 18, maxWidth: '290px' }).setLngLat(lngLat).setHTML(html).addTo(map);
+    }
+
+    let categories = {};
+    function pictoHtml(cat) {
+      const c = categories[cat];
+      return `<span class="picto" style="background:${c.couleur}" aria-hidden="true">${c.picto}</span>`;
+    }
+    function popupHtml(p) {
+      const c = categories[p.categorie];
+      let mh = '';
+      if (p.mh) {
+        const siecle = p.mh_siecle ? ` · ${escapeHtml(p.mh_siecle)}` : '';
+        const partie = p.mh_partie ? `<br>${escapeHtml(p.mh_partie)}` : '';
+        mh = `<p class="info"><span class="mh">MH</span> Monument historique ${escapeHtml(p.mh)}${siecle}${partie}<br>
+          <a href="${p.mh_url}" target="_blank" rel="noopener">Notice Mérimée « ${escapeHtml(p.mh_titre)} » (${p.mh_reference})</a></p>`;
+      }
+      return `<div class="popup">
+        <h3>${escapeHtml(p.nom)}</h3>
+        <span class="cat">${escapeHtml(c.libelle)}</span>
+        ${mh}
+        <p>${escapeHtml(p.description)}</p>
+        ${p.adresse ? `<p class="info">📍 ${escapeHtml(p.adresse)}</p>` : ''}
+        ${p.site ? `<p class="info"><a href="${p.site}" target="_blank" rel="noopener">Horaires et informations ↗</a></p>` : ''}
+        <div class="source"${p.recherche_web ? ` title="Recherche web : ${escapeHtml(p.recherche_web)}"` : ''}>Source : ${escapeHtml(p.source)}</div>
+      </div>`;
+    }
+    function focusLieu(f) {
+      if (mobile.matches) setReplie(true);
+      map.easeTo({ center: f.geometry.coordinates, zoom: Math.max(map.getZoom(), 16.5), padding: padding() });
+      showPopup(f.geometry.coordinates, popupHtml(f.properties));
+    }
+
+    const loading = document.getElementById('loading');
+    const dataPromise = fetch('data/tourisme.geojson').then(r => {
+      if (!r.ok) throw new Error(r.statusText);
+      return r.json();
+    });
+
+    map.on('load', async () => {
+      let data;
+      try {
+        data = await dataPromise;
+      } catch (err) {
+        loading.textContent = 'Échec du chargement des lieux';
+        loading.classList.add('error');
+        return;
+      }
+      loading.hidden = true;
+      categories = data.categories;
+
+      map.addSource('tourisme', {
+        type: 'geojson', data,
+        attribution: '© IGN – BD TOPO® · Ministère de la Culture – Mérimée · Géoplateforme (géocodage)'
+      });
+      // Au-dessus des aplats du fond, sous ses libellés (le style Plan IGN intercale des symboles tôt dans la pile)
+      const styleLayers = map.getStyle().layers;
+      const lastFill = styleLayers.map(l => l.type).lastIndexOf('fill');
+      const beforeId = styleLayers.slice(lastFill + 1).find(l => l.type === 'symbol')?.id;
+      map.addLayer({
+        id: 'riviere', type: 'line', source: 'tourisme',
+        filter: ['==', ['get', 'categorie'], 'riviere'],
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': '#4a6fa5', 'line-width': 4, 'line-opacity': 0.8 }
+      }, beforeId);
+      map.on('click', 'riviere', e => showPopup(e.lngLat, `<div class="popup"><h3>La Gartempe</h3>
+        <span class="cat">Rivière, affluent de la Creuse</span>
+        <div class="source">Source : IGN – BD TOPO® (tronçons hydrographiques)</div></div>`));
+      map.on('mouseenter', 'riviere', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'riviere', () => { map.getCanvas().style.cursor = ''; });
+
+      const lieux = data.features.filter(f => f.geometry.type === 'Point' && categories[f.properties.categorie]);
+
+      // Marqueurs
+      lieux.forEach(f => {
+        const p = f.properties;
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'marker picto';
+        el.style.background = categories[p.categorie].couleur;
+        el.setAttribute('aria-label', p.nom + (p.mh ? ' (monument historique)' : ''));
+        el.innerHTML = categories[p.categorie].picto + (p.mh ? '<span class="mh">MH</span>' : '');
+        el.addEventListener('click', e => { e.stopPropagation(); showPopup(f.geometry.coordinates, popupHtml(p)); });
+        new maplibregl.Marker({ element: el }).setLngLat(f.geometry.coordinates).addTo(map);
+      });
+
+      // Liste par catégorie et légende
+      const liste = document.getElementById('liste');
+      const legende = document.getElementById('legende');
+      Object.entries(categories).forEach(([id, c]) => {
+        const items = lieux.filter(f => f.properties.categorie === id);
+        if (!items.length) return;
+        const h2 = document.createElement('h2');
+        h2.textContent = c.libelle;
+        const ul = document.createElement('ul');
+        items.forEach(f => {
+          const p = f.properties;
+          const li = document.createElement('li');
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'lieu';
+          b.innerHTML = `${pictoHtml(id)}<span><span class="nom">${escapeHtml(p.nom)}</span>${p.mh ? ' <span class="mh">MH</span>' : ''}
+            ${p.mh ? `<span class="detail">Monument historique ${escapeHtml(p.mh)}</span>` : ''}</span>`;
+          b.addEventListener('click', () => focusLieu(f));
+          li.appendChild(b);
+          ul.appendChild(li);
+        });
+        liste.append(h2, ul);
+        legende.insertAdjacentHTML('beforeend', `<div>${pictoHtml(id)}${escapeHtml(c.libelle)}</div>`);
+      });
+      legende.insertAdjacentHTML('beforeend', `
+        <div><span class="mh">MH</span>Monument historique</div>
+        <div><span class="trait-riviere"></span>La Gartempe</div>`);
+
+      // Vue initiale : emprise des lieux, hors de la zone couverte par la fiche
+      const bounds = new maplibregl.LngLatBounds();
+      lieux.forEach(f => bounds.extend(f.geometry.coordinates));
+      map.fitBounds(bounds, { padding: padding(), duration: 0, maxZoom: 16 });
+      document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
+    });
+  </script>
+</body>
+</html>

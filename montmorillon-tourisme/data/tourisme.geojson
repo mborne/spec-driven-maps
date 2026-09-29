@@ -1,0 +1,1186 @@
+{
+ "type": "FeatureCollection",
+ "categories": {
+  "musees": {
+   "libelle": "Musées",
+   "couleur": "#8b1a1a",
+   "picto": "🏛"
+  },
+  "religieux": {
+   "libelle": "Patrimoine religieux",
+   "couleur": "#6b4c8b",
+   "picto": "⛪"
+  },
+  "monuments": {
+   "libelle": "Monuments civils",
+   "couleur": "#5a3a1a",
+   "picto": "🏰"
+  },
+  "ecrit": {
+   "libelle": "Cité de l'Écrit",
+   "couleur": "#2c6b6b",
+   "picto": "📚"
+  },
+  "espaces": {
+   "libelle": "Espaces et promenades",
+   "couleur": "#4a6741",
+   "picto": "🌿"
+  },
+  "services": {
+   "libelle": "Office de tourisme",
+   "couleur": "#b8860b",
+   "picto": "ℹ️"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.872568,
+     46.428621
+    ]
+   },
+   "properties": {
+    "id": "musee-art-histoire",
+    "categorie": "musees",
+    "nom": "Musée d'Art et d'Histoire",
+    "description": "Musée de France créé en 1936 : collections d'art et d'histoire locale.",
+    "source": "IGN – BD TOPO® (SURFACTI0000002012620301) et recherche web",
+    "recherche_web": "lien vers le site officiel ; date de création",
+    "adresse": "5 Avenue Pasteur",
+    "site": "https://www.montmorillon.fr/contacts/musee-de-france-dart-et-dhistoire-de-montmorillon-mahm/"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.870254,
+     46.424512
+    ]
+   },
+   "properties": {
+    "id": "musee-macaron",
+    "categorie": "musees",
+    "nom": "Musée de l'Amande et du Macaron",
+    "description": "Histoire de l'amande et du macaron de Montmorillon, présentée par la maison Rannou-Métivier.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000223411911) et recherche web",
+    "recherche_web": "lien vers le site officiel ; description",
+    "adresse": "34 Boulevard de Strasbourg",
+    "site": "https://www.museedumacaron.com/"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.86634,
+     46.42615
+    ]
+   },
+   "properties": {
+    "id": "notre-dame",
+    "categorie": "religieux",
+    "nom": "Église Notre-Dame",
+    "description": "Église romane dominant la Gartempe ; sa crypte Sainte-Catherine est ornée de peintures murales du XIIe siècle.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000090133952) et recherche web",
+    "recherche_web": "crypte Sainte-Catherine et ses peintures murales (ancienne carte)",
+    "mh": "classé",
+    "mh_reference": "PA00105545",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105545",
+    "mh_titre": "Église Notre-Dame (ancienne)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.87174,
+     46.426664
+    ]
+   },
+   "properties": {
+    "id": "saint-martial",
+    "categorie": "religieux",
+    "nom": "Église Saint-Martial",
+    "description": "Église reconstruite de 1861 à 1872, au cœur de la ville haute.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000090116518)",
+    "mh": "inscrit",
+    "mh_reference": "PA00105546",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105546",
+    "mh_titre": "Église Saint-Martial",
+    "mh_siecle": "3e quart 19e siècle"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.864058,
+     46.421565
+    ]
+   },
+   "properties": {
+    "id": "octogone",
+    "categorie": "religieux",
+    "nom": "Octogone",
+    "description": "Chapelle funéraire romane à plan octogonal, avec un ossuaire au rez-de-chaussée et une chapelle à l'étage.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000223411829) et recherche web",
+    "recherche_web": "ossuaire et chapelle à l'étage (ancienne carte)",
+    "mh": "classé",
+    "mh_reference": "PA00105548",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105548",
+    "mh_titre": "Ancien Hôtel-Dieu",
+    "mh_partie": "Chapelle octogonale de l'ancien Hôtel-Dieu, classée en 1840"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.863997,
+     46.422773
+    ]
+   },
+   "properties": {
+    "id": "saint-laurent",
+    "categorie": "religieux",
+    "nom": "Chapelle Saint-Laurent",
+    "description": "Chapelle de la Maison-Dieu, dont la façade et le clocher remontent au XIIe siècle.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000090129986) et recherche web",
+    "recherche_web": "façade et clocher du XIIe siècle (ancienne carte)",
+    "mh": "inscrit",
+    "mh_reference": "PA00105548",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105548",
+    "mh_titre": "Ancien Hôtel-Dieu",
+    "mh_partie": "Chapelle de l'ancien Hôtel-Dieu, inscrite en 1930"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.863988,
+     46.42278
+    ]
+   },
+   "properties": {
+    "id": "maison-dieu",
+    "categorie": "monuments",
+    "nom": "Maison-Dieu (ancien Hôtel-Dieu)",
+    "description": "Ensemble fondé au XIe siècle pour accueillir pèlerins et malades : Octogone, chapelle Saint-Laurent, chauffoir et jardins.",
+    "source": "Culture – Mérimée (PA00105548) et recherche web",
+    "recherche_web": "fondation au XIe siècle, accueil des pèlerins et malades (ancienne carte)",
+    "adresse": "4 Rue des Augustins",
+    "mh": "classé et inscrit (partiellement)",
+    "mh_reference": "PA00105548",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105548",
+    "mh_titre": "Ancien Hôtel-Dieu",
+    "mh_siecle": "12e siècle, 15e siècle, 16e siècle, 17e siècle, 4e quart 19e siècle"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.871471,
+     46.425928
+    ]
+   },
+   "properties": {
+    "id": "hotel-moussac",
+    "categorie": "monuments",
+    "nom": "Hôtel de Moussac",
+    "description": "Hôtel particulier du XVIIIe siècle ; escalier à rampe en fer forgé.",
+    "source": "Culture – Mérimée (PA00105549)",
+    "adresse": "16 Rue Solférino",
+    "mh": "classé (partiellement)",
+    "mh_reference": "PA00105549",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105549",
+    "mh_titre": "Hôtel de Moussac",
+    "mh_siecle": "2e quart 18e siècle"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.86864,
+     46.427002
+    ]
+   },
+   "properties": {
+    "id": "hotel-saint-christophe",
+    "categorie": "monuments",
+    "nom": "Hôtel, rue Saint-Christophe",
+    "description": "Hôtel particulier du XVIIIe siècle, avec son parc.",
+    "source": "Culture – Mérimée (PA00105550)",
+    "adresse": "7 Rue Saint-Christophe",
+    "mh": "inscrit",
+    "mh_reference": "PA00105550",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105550",
+    "mh_titre": "Hôtel",
+    "mh_siecle": "2e quart 18e siècle"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.866565,
+     46.425988
+    ]
+   },
+   "properties": {
+    "id": "maison-brouard",
+    "categorie": "monuments",
+    "nom": "Maison dite du Brouard",
+    "description": "Maison ancienne du quartier du Brouard, au cœur de la Cité de l'Écrit.",
+    "source": "Culture – Mérimée (PA00105552)",
+    "adresse": "6 Rue Montebello",
+    "mh": "inscrit",
+    "mh_reference": "PA00105552",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA00105552",
+    "mh_titre": "Maison dite du Brouard"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.865919,
+     46.426822
+    ]
+   },
+   "properties": {
+    "id": "ancien-hopital",
+    "categorie": "monuments",
+    "nom": "Ancien hôpital",
+    "description": "Bâtiments du XIXe siècle et jardins attenants, place Régine-Deforges.",
+    "source": "Culture – Mérimée (PA86000064)",
+    "adresse": "Place Régine-Deforges",
+    "mh": "inscrit",
+    "mh_reference": "PA86000064",
+    "mh_url": "https://pop.culture.gouv.fr/notice/merimee/PA86000064",
+    "mh_titre": "Ancien hôpital",
+    "mh_siecle": "19e siècle"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.867363,
+     46.425792
+    ]
+   },
+   "properties": {
+    "id": "vieux-pont",
+    "categorie": "monuments",
+    "nom": "Vieux Pont",
+    "description": "Pont médiéval sur la Gartempe, au pied de l'église Notre-Dame.",
+    "source": "IGN – BD TOPO® (CONSLINE0000000054298680) et recherche web",
+    "recherche_web": "origine médiévale (ancienne carte)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.866274,
+     46.425988
+    ]
+   },
+   "properties": {
+    "id": "cite-ecrit",
+    "categorie": "ecrit",
+    "nom": "Cité de l'Écrit et des Métiers du Livre",
+    "description": "Le quartier médiéval du Brouard, rénové et dédié aux métiers du livre : librairies, reliure, calligraphie, gravure.",
+    "source": "IGN – BD TOPO® (PAIHABIT0000002207067543) et recherche web",
+    "recherche_web": "métiers du livre représentés (ancienne carte)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.864714,
+     46.422841
+    ]
+   },
+   "properties": {
+    "id": "prairie-seminaire",
+    "categorie": "espaces",
+    "nom": "Prairie du Séminaire",
+    "description": "Vaste prairie au pied de la Maison-Dieu, avec un théâtre de plein air.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000090129984)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.87403,
+     46.420919
+    ]
+   },
+   "properties": {
+    "id": "camille-olivet",
+    "categorie": "espaces",
+    "nom": "Espace Camille Olivet",
+    "description": "Jardins au bord de la Gartempe.",
+    "source": "Adresse géocodée (Géoplateforme) et recherche web",
+    "recherche_web": "adresse et description (ancienne carte ; lieu absent des référentiels)",
+    "adresse": "23 Avenue Fernand Tribot"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.865845,
+     46.426037
+    ]
+   },
+   "properties": {
+    "id": "square-boudard",
+    "categorie": "espaces",
+    "nom": "Square Alphonse Boudard",
+    "description": "Square nommé en hommage à l'écrivain Alphonse Boudard.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000315532392) et recherche web",
+    "recherche_web": "hommage à l'écrivain (ancienne carte)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.867696,
+     46.424715
+    ]
+   },
+   "properties": {
+    "id": "square-medina",
+    "categorie": "espaces",
+    "nom": "Square Médina del Campo",
+    "description": "Square du centre-ville, près de la mairie.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000242611947)"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.868083,
+     46.425345
+    ]
+   },
+   "properties": {
+    "id": "office-tourisme",
+    "categorie": "services",
+    "nom": "Office de tourisme",
+    "description": "Accueil et documentation touristique de l'Office de tourisme Sud Vienne Poitou.",
+    "source": "IGN – BD TOPO® (SURFACTI0000000319021128) et recherche web",
+    "recherche_web": "lien vers la fiche du bureau de Montmorillon",
+    "adresse": "2 Place du Maréchal Leclerc",
+    "site": "https://www.sudviennepoitou.com/toute-l-offre/office-de-tourisme-sud-vienne-poitou-3733478"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       0.868411,
+       46.438882
+      ],
+      [
+       0.868391,
+       46.439153
+      ],
+      [
+       0.868297,
+       46.439768
+      ],
+      [
+       0.868268,
+       46.439875
+      ],
+      [
+       0.868198,
+       46.440131
+      ],
+      [
+       0.868126,
+       46.440329
+      ],
+      [
+       0.867914,
+       46.441005
+      ],
+      [
+       0.867845,
+       46.441384
+      ],
+      [
+       0.867825,
+       46.441714
+      ],
+      [
+       0.867809,
+       46.442233
+      ],
+      [
+       0.867791,
+       46.442886
+      ],
+      [
+       0.867873,
+       46.443196
+      ],
+      [
+       0.867962,
+       46.443501
+      ],
+      [
+       0.867979,
+       46.443797
+      ],
+      [
+       0.867969,
+       46.443912
+      ],
+      [
+       0.867939,
+       46.444047
+      ],
+      [
+       0.867873,
+       46.444209
+      ],
+      [
+       0.867627,
+       46.444647
+      ],
+      [
+       0.86744,
+       46.444914
+      ],
+      [
+       0.86732,
+       46.445056
+      ],
+      [
+       0.867087,
+       46.445289
+      ],
+      [
+       0.866556,
+       46.445771
+      ],
+      [
+       0.866183,
+       46.446066
+      ],
+      [
+       0.86591,
+       46.446251
+      ],
+      [
+       0.865644,
+       46.446393
+      ],
+      [
+       0.865059,
+       46.446711
+      ],
+      [
+       0.864661,
+       46.446945
+      ],
+      [
+       0.864382,
+       46.44715
+      ],
+      [
+       0.863931,
+       46.447547
+      ],
+      [
+       0.863424,
+       46.44795
+      ]
+     ],
+     [
+      [
+       0.874145,
+       46.41989
+      ],
+      [
+       0.874067,
+       46.419904
+      ],
+      [
+       0.873991,
+       46.419921
+      ],
+      [
+       0.873872,
+       46.419965
+      ],
+      [
+       0.873228,
+       46.420258
+      ],
+      [
+       0.872254,
+       46.420722
+      ],
+      [
+       0.871405,
+       46.421169
+      ],
+      [
+       0.870613,
+       46.421616
+      ],
+      [
+       0.870543,
+       46.421662
+      ]
+     ],
+     [
+      [
+       0.870543,
+       46.421662
+      ],
+      [
+       0.870364,
+       46.421783
+      ],
+      [
+       0.870229,
+       46.421883
+      ],
+      [
+       0.869958,
+       46.422102
+      ],
+      [
+       0.869774,
+       46.422284
+      ],
+      [
+       0.869485,
+       46.422587
+      ],
+      [
+       0.869243,
+       46.422908
+      ]
+     ],
+     [
+      [
+       0.875315,
+       46.419736
+      ],
+      [
+       0.875189,
+       46.419806
+      ],
+      [
+       0.875074,
+       46.419843
+      ],
+      [
+       0.874875,
+       46.41986
+      ],
+      [
+       0.874304,
+       46.419889
+      ],
+      [
+       0.874145,
+       46.41989
+      ]
+     ],
+     [
+      [
+       0.877423,
+       46.400066
+      ],
+      [
+       0.877313,
+       46.400349
+      ],
+      [
+       0.87714,
+       46.400878
+      ],
+      [
+       0.876969,
+       46.401392
+      ],
+      [
+       0.876897,
+       46.401832
+      ],
+      [
+       0.876856,
+       46.40226
+      ],
+      [
+       0.876831,
+       46.402387
+      ],
+      [
+       0.876685,
+       46.4027
+      ],
+      [
+       0.876652,
+       46.40285
+      ],
+      [
+       0.87668,
+       46.402897
+      ],
+      [
+       0.876912,
+       46.403016
+      ],
+      [
+       0.877008,
+       46.403093
+      ],
+      [
+       0.877072,
+       46.403177
+      ],
+      [
+       0.877084,
+       46.403252
+      ],
+      [
+       0.877062,
+       46.403426
+      ],
+      [
+       0.877062,
+       46.403431
+      ],
+      [
+       0.877046,
+       46.403636
+      ],
+      [
+       0.877039,
+       46.403734
+      ],
+      [
+       0.87701,
+       46.404015
+      ],
+      [
+       0.87703,
+       46.404285
+      ],
+      [
+       0.877134,
+       46.404793
+      ],
+      [
+       0.877223,
+       46.404987
+      ],
+      [
+       0.877483,
+       46.40529
+      ],
+      [
+       0.877769,
+       46.405557
+      ],
+      [
+       0.878106,
+       46.405834
+      ],
+      [
+       0.878331,
+       46.405973
+      ],
+      [
+       0.878504,
+       46.406061
+      ],
+      [
+       0.879008,
+       46.406277
+      ],
+      [
+       0.879108,
+       46.406327
+      ],
+      [
+       0.87987,
+       46.406702
+      ],
+      [
+       0.880449,
+       46.407045
+      ],
+      [
+       0.881071,
+       46.407467
+      ],
+      [
+       0.881377,
+       46.407764
+      ],
+      [
+       0.881617,
+       46.408075
+      ],
+      [
+       0.881722,
+       46.40826
+      ],
+      [
+       0.881801,
+       46.408402
+      ],
+      [
+       0.882038,
+       46.408891
+      ],
+      [
+       0.882374,
+       46.409437
+      ],
+      [
+       0.882619,
+       46.409944
+      ],
+      [
+       0.882749,
+       46.410257
+      ],
+      [
+       0.882845,
+       46.410578
+      ],
+      [
+       0.882935,
+       46.410969
+      ],
+      [
+       0.882957,
+       46.411242
+      ],
+      [
+       0.882938,
+       46.411508
+      ],
+      [
+       0.882881,
+       46.41182
+      ],
+      [
+       0.882801,
+       46.412077
+      ],
+      [
+       0.882687,
+       46.412337
+      ],
+      [
+       0.88244,
+       46.412728
+      ],
+      [
+       0.882042,
+       46.41327
+      ],
+      [
+       0.881798,
+       46.413596
+      ],
+      [
+       0.881641,
+       46.413753
+      ],
+      [
+       0.881081,
+       46.414182
+      ],
+      [
+       0.881015,
+       46.414231
+      ],
+      [
+       0.880961,
+       46.414274
+      ],
+      [
+       0.880781,
+       46.414414
+      ],
+      [
+       0.87998,
+       46.41504
+      ],
+      [
+       0.879678,
+       46.415323
+      ],
+      [
+       0.879381,
+       46.415639
+      ],
+      [
+       0.879145,
+       46.41595
+      ],
+      [
+       0.878676,
+       46.416501
+      ],
+      [
+       0.878469,
+       46.416757
+      ],
+      [
+       0.878246,
+       46.417075
+      ],
+      [
+       0.877796,
+       46.417773
+      ],
+      [
+       0.877486,
+       46.418266
+      ],
+      [
+       0.877334,
+       46.418476
+      ],
+      [
+       0.87711,
+       46.418743
+      ],
+      [
+       0.877013,
+       46.418839
+      ],
+      [
+       0.876787,
+       46.41903
+      ],
+      [
+       0.876515,
+       46.419219
+      ],
+      [
+       0.876137,
+       46.419401
+      ],
+      [
+       0.875823,
+       46.41951
+      ]
+     ],
+     [
+      [
+       0.875823,
+       46.41951
+      ],
+      [
+       0.875416,
+       46.419683
+      ],
+      [
+       0.875315,
+       46.419736
+      ]
+     ],
+     [
+      [
+       0.874217,
+       46.419703
+      ],
+      [
+       0.874145,
+       46.41989
+      ]
+     ],
+     [
+      [
+       0.875058,
+       46.41946
+      ],
+      [
+       0.874831,
+       46.419474
+      ],
+      [
+       0.874477,
+       46.419515
+      ],
+      [
+       0.874339,
+       46.419551
+      ],
+      [
+       0.874244,
+       46.419639
+      ],
+      [
+       0.874217,
+       46.419703
+      ]
+     ],
+     [
+      [
+       0.875823,
+       46.41951
+      ],
+      [
+       0.875058,
+       46.41946
+      ]
+     ],
+     [
+      [
+       0.869243,
+       46.422908
+      ],
+      [
+       0.869152,
+       46.42303
+      ],
+      [
+       0.868849,
+       46.423379
+      ],
+      [
+       0.868681,
+       46.423567
+      ],
+      [
+       0.868006,
+       46.424018
+      ],
+      [
+       0.867483,
+       46.424357
+      ],
+      [
+       0.867322,
+       46.424489
+      ],
+      [
+       0.867227,
+       46.424587
+      ],
+      [
+       0.867139,
+       46.424779
+      ],
+      [
+       0.86705,
+       46.425104
+      ],
+      [
+       0.867018,
+       46.425246
+      ],
+      [
+       0.867017,
+       46.425348
+      ],
+      [
+       0.867194,
+       46.425774
+      ],
+      [
+       0.867728,
+       46.42671
+      ],
+      [
+       0.868225,
+       46.427564
+      ],
+      [
+       0.868403,
+       46.427897
+      ],
+      [
+       0.868588,
+       46.428238
+      ],
+      [
+       0.868782,
+       46.428597
+      ],
+      [
+       0.869137,
+       46.429094
+      ],
+      [
+       0.86928,
+       46.429296
+      ],
+      [
+       0.869464,
+       46.429583
+      ],
+      [
+       0.869641,
+       46.429856
+      ],
+      [
+       0.869761,
+       46.43012
+      ],
+      [
+       0.869802,
+       46.430276
+      ],
+      [
+       0.869807,
+       46.430458
+      ],
+      [
+       0.869767,
+       46.430971
+      ],
+      [
+       0.869798,
+       46.431174
+      ],
+      [
+       0.869859,
+       46.431413
+      ],
+      [
+       0.870161,
+       46.432059
+      ],
+      [
+       0.870267,
+       46.432379
+      ],
+      [
+       0.870313,
+       46.432635
+      ],
+      [
+       0.870337,
+       46.43286
+      ],
+      [
+       0.870343,
+       46.433486
+      ],
+      [
+       0.87033,
+       46.433896
+      ],
+      [
+       0.870331,
+       46.434038
+      ],
+      [
+       0.87031,
+       46.434186
+      ],
+      [
+       0.870222,
+       46.43437
+      ],
+      [
+       0.869933,
+       46.434858
+      ],
+      [
+       0.86971,
+       46.435143
+      ],
+      [
+       0.869075,
+       46.435718
+      ],
+      [
+       0.868982,
+       46.435841
+      ],
+      [
+       0.868722,
+       46.436173
+      ],
+      [
+       0.868481,
+       46.436522
+      ],
+      [
+       0.868343,
+       46.436805
+      ],
+      [
+       0.868231,
+       46.437111
+      ],
+      [
+       0.868173,
+       46.4374
+      ],
+      [
+       0.868176,
+       46.437642
+      ],
+      [
+       0.868241,
+       46.437929
+      ],
+      [
+       0.868408,
+       46.438691
+      ],
+      [
+       0.868411,
+       46.438882
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "riviere",
+    "nom": "La Gartempe",
+    "source": "IGN – BD TOPO® (tronçons hydrographiques)"
+   }
+  }
+ ]
+}
