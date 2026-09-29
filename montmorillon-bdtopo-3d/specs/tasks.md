@@ -9,4 +9,4 @@
 - [x] Vérifier les critères d'acceptation de `spec.md`
 - [x] Rédiger `README.md` (carte, méthode, prompt équivalent)
 - [x] Mettre à jour le README racine
-- [ ] Mettre à jour l'issue #14 et ouvrir la PR
+- [x] Mettre à jour l'issue #14 et ouvrir la [PR #17](https://github.com/mborne/spec-driven-maps/pull/17)
