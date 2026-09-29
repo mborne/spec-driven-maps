@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Montmorillon – Bâtiments BD TOPO en 3D</title>
+  <meta name="description" content="Les bâtiments de Montmorillon en 3D d'après la BD TOPO de l'IGN : hauteurs, usages et origine des hauteurs.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,900&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css">
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <style>
+    :root {
+      --ink: #1c1a17;
+      --paper: #f6f1e7;
+      --line: rgba(28, 26, 23, 0.12);
+      --accent: #c2703f;
+      --panel-bg: rgba(246, 241, 231, 0.9);
+      --muted: rgba(28, 26, 23, 0.6);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font-family: 'Public Sans', system-ui, sans-serif; color: var(--ink); overflow: hidden;
+      /* Ciel visible au-delà de l'horizon quand la carte est inclinée */
+      background: linear-gradient(180deg, #a9cce6 0%, #cfe0ec 45%, #e8eef3 100%);
+    }
+    #map { position: absolute; inset: 0; }
+
+    /* Panneau de réglages */
+    .panel {
+      position: absolute; top: 12px; left: 12px; z-index: 5; width: 290px; max-width: calc(100vw - 70px);
+      max-height: calc(100% - 60px); overflow-y: auto;
+      background: var(--panel-bg); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 18px 50px -20px rgba(28, 26, 23, 0.5);
+    }
+    .panel__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px 12px; border-bottom: 1px solid var(--line); }
+    .panel__title { font-family: 'Fraunces', serif; font-weight: 900; font-size: 21px; line-height: 1; margin: 0; }
+    .panel__sub { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-top: 4px; }
+    .panel__toggle {
+      border: none; background: none; cursor: pointer; font-size: 20px; color: var(--ink);
+      width: 36px; height: 36px; border-radius: 8px; flex: none;
+    }
+    .panel__toggle:hover, .panel__toggle:focus-visible { background: rgba(28, 26, 23, 0.08); }
+    .panel__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 16px; }
+    .panel.collapsed .panel__body { display: none; }
+    .panel.collapsed .panel__head { border-bottom: 0; }
+    .group__label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 0 7px; display: block; }
+    .seg { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: rgba(255, 255, 255, 0.4); }
+    .seg button {
+      flex: 1; border: none; background: none; cursor: pointer; min-height: 36px; padding: 8px 6px;
+      font: 600 12.5px 'Public Sans', system-ui, sans-serif; color: var(--muted);
+    }
+    .seg button + button { border-left: 1px solid var(--line); }
+    .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .switch { display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; user-select: none; font-size: 13px; font-weight: 500; }
+    .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .track { position: relative; width: 42px; height: 24px; border-radius: 99px; background: rgba(28, 26, 23, 0.22); transition: 0.2s; flex: none; }
+    .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: 0.2s; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+    .switch input:checked + .track { background: var(--accent); }
+    .switch input:checked + .track::after { transform: translateX(18px); }
+    .switch input:focus-visible + .track { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .legend { display: flex; flex-direction: column; gap: 6px; }
+    .legend__row { display: flex; align-items: center; gap: 9px; font-size: 12.5px; }
+    .legend__row small { margin-left: auto; color: var(--muted); }
+    .swatch { width: 14px; height: 14px; border-radius: 4px; flex: none; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12); }
+    .note { font-size: 11.5px; line-height: 1.45; color: var(--muted); margin: 0; }
+
+    /* Fiche d'un bâtiment */
+    .maplibregl-popup-content { font: 13px/1.5 'Public Sans', system-ui, sans-serif; color: var(--ink); padding: 10px 14px 10px 12px; border-radius: 10px; }
+    .fiche h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 15px; margin: 0 16px 4px 0; }
+    .fiche dl { display: grid; grid-template-columns: auto 1fr; gap: 1px 10px; margin: 0; }
+    .fiche dt { color: var(--muted); }
+    .fiche dd { margin: 0; font-weight: 500; }
+    .fiche .origine { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+    .fiche .origine.estimee { color: var(--accent); }
+    .fiche code { font-size: 11px; }
+
+    /* Messages */
+    #loader {
+      position: absolute; inset: 0; z-index: 8; display: flex; align-items: center; justify-content: center;
+      background: var(--paper); transition: opacity 0.5s; font-family: 'Fraunces', serif;
+    }
+    #loader.hidden { opacity: 0; pointer-events: none; }
+    #loader .l { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    #loader .dot { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgba(28, 26, 23, 0.15); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
+    #loader p { font-size: 15px; font-weight: 600; margin: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .zoom-hint {
+      position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 4;
+      background: var(--panel-bg); border: 1px solid var(--line); border-radius: 99px; padding: 6px 14px; font-size: 13px;
+    }
+    .zoom-hint[hidden] { display: none; }
+
+    /* Pied de carte (GitHub / Mentions légales) : centré en bas, séparé des attributions */
+    .mentions {
+      position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 4;
+      background: rgba(246, 241, 231, 0.85); padding: 2px 10px; border-radius: 99px;
+      font-size: 12px; white-space: nowrap; color: var(--muted);
+    }
+    .mentions a { color: var(--ink); }
+    .maplibregl-ctrl-group { border-radius: 12px !important; overflow: hidden; }
+
+    @media (max-width: 700px) {
+      .panel { top: 10px; left: 10px; width: 260px; }
+      .zoom-hint { top: auto; bottom: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="loader" role="status" aria-live="polite"><div class="l"><div class="dot"></div><p>Chargement de Montmorillon…</p></div></div>
+  <div class="zoom-hint" id="zoom-hint" role="status" hidden>Zoomez pour afficher les bâtiments</div>
+
+  <section class="panel" id="panel" aria-label="Réglages de la carte">
+    <div class="panel__head">
+      <div>
+        <h1 class="panel__title">Montmorillon</h1>
+        <div class="panel__sub">Bâtiments BD TOPO® · IGN</div>
+      </div>
+      <button class="panel__toggle" id="toggle" aria-expanded="true" aria-controls="panel-body" title="Réduire / agrandir">–</button>
+    </div>
+    <div class="panel__body" id="panel-body">
+      <div>
+        <span class="group__label" id="lbl-fond">Fond de carte</span>
+        <div class="seg" id="basemap" role="group" aria-labelledby="lbl-fond">
+          <button data-base="plan" aria-pressed="true">Plan IGN</button>
+          <button data-base="ortho" aria-pressed="false">Orthophoto</button>
+        </div>
+      </div>
+      <div>
+        <span class="group__label" id="lbl-couleur">Coloration des bâtiments</span>
+        <div class="seg" id="colormode" role="group" aria-labelledby="lbl-couleur">
+          <button data-mode="usage" aria-pressed="true">Par usage</button>
+          <button data-mode="height" aria-pressed="false">Par hauteur</button>
+        </div>
+      </div>
+      <label class="switch">
+        <span>Relief 3D des bâtiments</span>
+        <input type="checkbox" id="show3d" checked>
+        <span class="track" aria-hidden="true"></span>
+      </label>
+      <div>
+        <span class="group__label">Légende</span>
+        <div class="legend" id="legend"></div>
+      </div>
+      <p class="note">Hauteur : valeur BD TOPO, sinon nombre d'étages × 3 m, sinon 3 m par défaut. Cliquez sur un bâtiment pour voir ses attributs.</p>
+    </div>
+  </section>
+
+  <div class="mentions"><a href="https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-bdtopo-3d#readme" target="_blank" rel="noopener">GitHub</a> / <a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
+
+  <script>
+    const ATTR_BDTOPO = '© <a href="https://www.ign.fr/" target="_blank" rel="noopener">IGN</a> – BD TOPO®';
+    const ATTR_ORTHO = '© IGN – Orthophotographie (Géoplateforme)';
+    const MIN_ZOOM_BATIMENTS = 15;  // la couche « batiment » des tuiles BD TOPO commence au zoom 15
+
+    // Hauteur retenue : hauteur, sinon nombre d'étages × 3 m, sinon 3 m
+    const num = key => ['to-number', ['coalesce', ['get', key], 0]];
+    const HEIGHT = ['case',
+      ['>', num('hauteur'), 0], num('hauteur'),
+      ['>', num('nombre_d_etages'), 0], ['*', num('nombre_d_etages'), 3],
+      3
+    ];
+
+    // Colorations : la légende est générée à partir des mêmes tableaux
+    const USAGES = [
+      ['Résidentiel', '#d98c5f'],
+      ['Commercial et services', '#5b8bb5'],
+      ['Industriel', '#7d8a99'],
+      ['Agricole', '#8aa86a'],
+      ['Sportif', '#56a6a0'],
+      ['Religieux', '#9b7bb5'],
+      ['Annexe', '#cab38f'],
+      ['Indifférencié', '#b9b1a4']
+    ];
+    const HEIGHT_BREAKS = [4, 8, 12, 20];  // m
+    const HEIGHT_COLORS = ['#e8d9c0', '#d8b48c', '#c98a5c', '#a85a3c', '#6e3a30'];
+    const COLOR_USAGE = ['match', ['get', 'usage_1'], ...USAGES.flat(), '#b9b1a4'];
+    const COLOR_HEIGHT = ['step', HEIGHT, HEIGHT_COLORS[0], ...HEIGHT_BREAKS.flatMap((b, i) => [b, HEIGHT_COLORS[i + 1]])];
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/standard.json',
+      center: [0.8713, 46.4262],
+      zoom: 15.6,
+      pitch: 58,
+      bearing: -22,
+      maxPitch: 80,
+      // Commune de Montmorillon (BD TOPO) élargie de 2 km
+      maxBounds: [[0.7996, 46.3634], [0.9882, 46.4949]],
+      hash: true,
+      attributionControl: { compact: true }
+    });
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
+    map.addControl(new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' }), 'bottom-left');
+
+    // Pied de carte : remonté au-dessus de l'attribution s'il la chevauche
+    const mentions = document.querySelector('.mentions');
+    function placeMentions() {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (!attrib) return;
+      mentions.style.marginBottom = '';
+      const m = mentions.getBoundingClientRect();
+      const a = attrib.getBoundingClientRect();
+      const overlap = m.right > a.left && m.left < a.right && m.bottom > a.top && m.top < a.bottom;
+      if (overlap) mentions.style.marginBottom = `${Math.ceil(m.bottom - a.top) + 4}px`;
+    }
+    window.addEventListener('resize', placeMentions);
+
+    map.on('load', () => {
+      const layers = map.getStyle().layers;
+
+      // Bâtiments plats du Plan IGN masqués : ils doubleraient la 3D
+      layers.filter(l => l['source-layer'] === 'bati_surf' && (l.type === 'fill' || l.type === 'line'))
+        .forEach(l => map.setLayoutProperty(l.id, 'visibility', 'none'));
+
+      // Orthophoto : au-dessus des aplats du fond, sous ses libellés
+      const lastFill = layers.map(l => l.type).lastIndexOf('fill');
+      const beforeLabels = layers.slice(lastFill + 1).find(l => l.type === 'symbol')?.id;
+      map.addSource('ign-ortho', {
+        type: 'raster', tileSize: 256, attribution: ATTR_ORTHO,
+        tiles: ['https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg']
+      });
+      map.addLayer({ id: 'ortho', type: 'raster', source: 'ign-ortho', layout: { visibility: 'none' } }, beforeLabels);
+
+      // Bâtiments BD TOPO en 3D, au-dessus de tout
+      map.addSource('bdtopo', {
+        type: 'vector', minzoom: 4, maxzoom: 19, attribution: ATTR_BDTOPO,
+        tiles: ['https://data.geopf.fr/tms/1.0.0/BDTOPO/{z}/{x}/{y}.pbf']
+      });
+      map.addLayer({
+        id: 'batiments-3d', type: 'fill-extrusion', source: 'bdtopo', 'source-layer': 'batiment',
+        minzoom: MIN_ZOOM_BATIMENTS,
+        paint: {
+          'fill-extrusion-color': COLOR_USAGE,
+          // Les volumes « poussent » entre les zooms 15 et 16
+          'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], MIN_ZOOM_BATIMENTS, 0, MIN_ZOOM_BATIMENTS + 1, HEIGHT],
+          'fill-extrusion-base': 0,
+          'fill-extrusion-opacity': 0.94,
+          'fill-extrusion-vertical-gradient': true
+        }
+      });
+
+      try {
+        map.setSky({ 'sky-color': '#a9cce6', 'sky-horizon-blend': 0.6, 'horizon-color': '#e6eef5', 'horizon-fog-blend': 0.6, 'fog-color': '#e2e9ef', 'fog-ground-blend': 0.08 });
+      } catch (e) { /* ancienne version de MapLibre : pas de ciel */ }
+
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      attrib?.classList.remove('maplibregl-compact-show');
+      if (attrib) new ResizeObserver(placeMentions).observe(attrib);
+      updateZoomHint();
+    });
+    map.once('idle', () => document.getElementById('loader').classList.add('hidden'));
+
+    // Message sous le zoom 15
+    const zoomHint = document.getElementById('zoom-hint');
+    function updateZoomHint() { zoomHint.hidden = map.getZoom() >= MIN_ZOOM_BATIMENTS || !document.getElementById('show3d').checked; }
+    map.on('zoomend', updateZoomHint);
+
+    // Fiche d'un bâtiment : une seule popup, réutilisée
+    const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const fmt = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+    const popup = new maplibregl.Popup({ closeButton: true, maxWidth: '300px' });
+    function heightInfo(p) {
+      const h = Number(p.hauteur), e = Number(p.nombre_d_etages);
+      if (h > 0) return { value: h, origine: 'mesurée (BD TOPO)', estimee: false };
+      if (e > 0) return { value: e * 3, origine: `déduite des ${e} étage${e > 1 ? 's' : ''} × 3 m`, estimee: true };
+      return { value: 3, origine: 'valeur par défaut (ni hauteur ni étages)', estimee: true };
+    }
+    function row(label, value) {
+      return value === undefined || value === null || value === '' ? '' : `<dt>${label}</dt><dd>${value}</dd>`;
+    }
+    map.on('click', 'batiments-3d', e => {
+      const p = e.features[0].properties;
+      const h = heightInfo(p);
+      const rnb = p.identifiants_rnb ? String(p.identifiants_rnb).split('/').map(id =>
+        `<a href="https://rnb.beta.gouv.fr/carte?q=${encodeURIComponent(id)}" target="_blank" rel="noopener"><code>${escapeHtml(id)}</code></a>`).join(' ') : '';
+      popup.setLngLat(e.lngLat).setHTML(`<div class="fiche">
+        <h3>${escapeHtml(p.usage_1 || 'Bâtiment')}</h3>
+        <dl>
+          ${row('Usage secondaire', p.usage_2 && escapeHtml(p.usage_2))}
+          ${row('Nature', p.nature && escapeHtml(p.nature))}
+          ${row('Hauteur', `${fmt.format(h.value)} m<span class="origine${h.estimee ? ' estimee' : ''}">${h.origine}</span>`)}
+          ${row('Étages', Number(p.nombre_d_etages) > 0 ? p.nombre_d_etages : undefined)}
+          ${row('Logements', Number(p.nombre_de_logements) > 0 ? p.nombre_de_logements : undefined)}
+          ${row('Altitude du sol', p.altitude_minimale_sol != null ? `${fmt.format(p.altitude_minimale_sol)} m` : undefined)}
+          ${row('Altitude du toit', p.altitude_maximale_toit != null ? `${fmt.format(p.altitude_maximale_toit)} m` : undefined)}
+          ${row('Acquisition', p.methode_d_acquisition_altimetrique && escapeHtml(p.methode_d_acquisition_altimetrique))}
+          ${row('Apparition', p.date_d_apparition && escapeHtml(p.date_d_apparition))}
+          ${row('cleabs', p.cleabs && `<code>${escapeHtml(p.cleabs)}</code>`)}
+          ${row('RNB', rnb)}
+        </dl></div>`).addTo(map);
+    });
+    map.on('mouseenter', 'batiments-3d', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'batiments-3d', () => { map.getCanvas().style.cursor = ''; });
+
+    // Réglages
+    function selectSeg(group, button) {
+      group.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+    }
+    const basemap = document.getElementById('basemap');
+    basemap.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      selectSeg(basemap, b);
+      map.setLayoutProperty('ortho', 'visibility', b.dataset.base === 'ortho' ? 'visible' : 'none');
+    });
+    const colormode = document.getElementById('colormode');
+    colormode.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      selectSeg(colormode, b);
+      map.setPaintProperty('batiments-3d', 'fill-extrusion-color', b.dataset.mode === 'height' ? COLOR_HEIGHT : COLOR_USAGE);
+      renderLegend(b.dataset.mode);
+    });
+    document.getElementById('show3d').addEventListener('change', e => {
+      map.setLayoutProperty('batiments-3d', 'visibility', e.target.checked ? 'visible' : 'none');
+      map.easeTo({ pitch: e.target.checked ? 58 : 0, duration: 700 });
+      updateZoomHint();
+    });
+
+    // Panneau repliable, replié par défaut sur smartphone
+    const panel = document.getElementById('panel');
+    const toggle = document.getElementById('toggle');
+    function setCollapsed(collapsed) {
+      panel.classList.toggle('collapsed', collapsed);
+      toggle.textContent = collapsed ? '+' : '–';
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+    }
+    toggle.addEventListener('click', () => setCollapsed(!panel.classList.contains('collapsed')));
+    if (window.matchMedia('(max-width: 700px)').matches) setCollapsed(true);
+
+    // Légende générée à partir des colorations
+    function renderLegend(mode) {
+      const rows = mode === 'height'
+        ? HEIGHT_COLORS.map((c, i) => [c, i === 0 ? `< ${HEIGHT_BREAKS[0]} m`
+            : i === HEIGHT_BREAKS.length ? `≥ ${HEIGHT_BREAKS[i - 1]} m`
+            : `${HEIGHT_BREAKS[i - 1]} – ${HEIGHT_BREAKS[i]} m`])
+        : USAGES.map(([name, c]) => [c, name]);
+      document.getElementById('legend').innerHTML = rows.map(([c, label]) =>
+        `<div class="legend__row"><span class="swatch" style="background:${c}"></span>${escapeHtml(label)}</div>`).join('');
+    }
+    renderLegend('usage');
+  </script>
+</body>
+</html>
