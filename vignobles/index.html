@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Où sont les vignobles ?</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css">
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; background: #fff; }
+    #map { position: absolute; inset: 0; }
+    .panel {
+      position: absolute; top: 10px; left: 10px; z-index: 1; width: 270px;
+      background: rgba(255, 255, 255, 0.94); padding: 10px 12px; border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); max-width: calc(100vw - 80px);
+      max-height: calc(100vh - 60px); overflow-y: auto; box-sizing: border-box;
+    }
+    .panel h1 { font-size: 17px; margin: 0 0 2px; color: #5a0f33; }
+    .panel .wip {
+      display: inline-block; margin: 0 0 4px; padding: 1px 8px; border-radius: 10px;
+      background: #fff3cd; border: 1px solid #e0b000; color: #6b4e00; font-size: 11px; font-weight: 600;
+    }
+    .panel .subtitle { font-size: 12px; margin: 0 0 8px; color: #444; }
+    .panel h2 { font-size: 12px; margin: 10px 0 4px; text-transform: uppercase; letter-spacing: .04em; color: #555; }
+    .legend { font-size: 12px; }
+    .legend div { display: flex; align-items: center; gap: 6px; line-height: 18px; }
+    .legend span { display: inline-block; width: 16px; height: 12px; border: 1px solid #aaa; flex: none; }
+    .legend .dash { height: 0; border: none; border-top: 2px dashed #5c1a33; }
+    .legend small { color: #666; }
+    .note { font-size: 11px; color: #555; margin: 8px 0 0; line-height: 1.35; }
+    .places { display: flex; flex-wrap: wrap; gap: 4px; }
+    .places button {
+      font: inherit; font-size: 12px; padding: 2px 8px; border: 1px solid #b44d72; border-radius: 12px;
+      background: #fff; color: #5a0f33; cursor: pointer;
+    }
+    .places button:hover, .places button:focus-visible { background: #f6e3e8; }
+    .toggle { display: none; }
+    @media (max-width: 500px) {
+      .panel { width: auto; padding: 6px 8px; }
+      .panel h1 { font-size: 14px; }
+      .toggle {
+        display: inline-block; float: right; font: inherit; font-size: 12px; margin-left: 6px;
+        border: 1px solid #aaa; border-radius: 4px; background: #fff; padding: 0 6px;
+      }
+      .panel.collapsed .details { display: none; }
+    }
+    .loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+      background: rgba(255, 255, 255, 0.92); padding: 8px 14px; border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); font-size: 14px;
+    }
+    .loading.error { color: #b10026; }
+    .loading[hidden] { display: none; }
+    /* Pied de carte (GitHub / Mentions légales) : centré en bas, séparé des attributions */
+    .mentions {
+      position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 1;
+      background: rgba(255, 255, 255, 0.85); padding: 2px 8px; border-radius: 4px;
+      font-size: 12px; white-space: nowrap; color: #666;
+    }
+    .mentions a { color: #333; }
+    .maplibregl-popup-content { font-size: 13px; }
+    .maplibregl-popup-content h3 { font-size: 14px; margin: 0 0 4px; color: #5a0f33; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="panel" id="panel">
+    <button class="toggle" id="toggle" aria-expanded="true" aria-controls="details">Légende</button>
+    <p class="wip">🚧 En construction</p>
+    <h1>Où sont les vignobles ?</h1>
+    <p class="subtitle">La vigne en France métropolitaine, du pays à la parcelle</p>
+    <div class="details" id="details">
+      <h2>Densité de vignoble par commune</h2>
+      <div class="legend" id="legend-communes"></div>
+      <div class="legend"><small>Part de la superficie communale plantée en vigne – jusqu'au zoom 13</small></div>
+      <h2>Surfaces de vigne</h2>
+      <div class="legend">
+        <div><span style="background:#7b1e3c;border-color:#7b1e3c"></span>Vigne (BD TOPO) <small>– à partir du zoom 12</small></div>
+      </div>
+      <h2>Bassins viticoles AOP</h2>
+      <div class="legend">
+        <div><span class="dash"></span>Grande région productrice <small>– jusqu'au zoom 10</small></div>
+      </div>
+      <h2>Aller à</h2>
+      <div class="places" id="places"></div>
+      <p class="note">Une aire d'appellation est une zone <em>autorisée</em>, pas une surface plantée ; les bassins sont un regroupement indicatif. Les vignes de la BD TOPO sont en partie détectées par IA. À Saint-Dié-des-Vosges, où cette carte a été imaginée, la vigne a presque disparu.</p>
+    </div>
+  </div>
+  <div class="mentions"><a href="https://github.com/mborne/spec-driven-maps/tree/main/vignobles#readme" target="_blank" rel="noopener">GitHub</a> / <a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
+  <div class="loading" id="loading" role="status" aria-live="polite">Chargement des vignobles…</div>
+  <script>
+    // Part de la superficie communale en vigne (%) : rampe séquentielle lie-de-vin
+    const BREAKS = [1, 5, 10, 25, 50];
+    const COLORS = ['#f6e3e8', '#e8b4c3', '#d4809b', '#b44d72', '#8c2451', '#5a0f33'];
+    const VINE_COLOR = '#7b1e3c';
+    const VINE_LAYER = 'ocs - vegetation - vigne'; // couche du style Plan IGN gris (complète à partir de z 13)
+
+    const PLACES = [
+      ['France', { bounds: [-5.3, 41.3, 9.7, 51.2] }],
+      ['Champagne', { center: [3.95, 49.05], zoom: 9 }],
+      ['Alsace', { center: [7.35, 48.25], zoom: 8.5 }],
+      ['Bourgogne', { center: [4.75, 46.85], zoom: 8.5 }],
+      ['Bordelais', { center: [-0.40, 44.95], zoom: 9 }],
+      ['Languedoc', { center: [3.30, 43.45], zoom: 8.5 }],
+      ['Saint-Dié-des-Vosges', { center: [6.95, 48.285], zoom: 10 }]
+    ];
+
+    const legend = document.getElementById('legend-communes');
+    COLORS.forEach((color, i) => {
+      const label = i === 0 ? `< ${BREAKS[0]} %`
+        : i === BREAKS.length ? `≥ ${BREAKS[i - 1]} %`
+        : `${BREAKS[i - 1]} – ${BREAKS[i]} %`;
+      legend.insertAdjacentHTML('beforeend', `<div><span style="background:${color}"></span>${label}</div>`);
+    });
+
+    // Légende repliable sur mobile
+    const panel = document.getElementById('panel');
+    const toggle = document.getElementById('toggle');
+    if (window.matchMedia('(max-width: 500px)').matches) {
+      panel.classList.add('collapsed');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    toggle.addEventListener('click', () => {
+      const collapsed = panel.classList.toggle('collapsed');
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+    });
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/gris.json',
+      bounds: PLACES[0][1].bounds,
+      fitBoundsOptions: { padding: 20 }
+    });
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+    map.addControl(new maplibregl.ScaleControl(), 'bottom-left');
+
+    const places = document.getElementById('places');
+    PLACES.forEach(([name, view]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = name;
+      button.addEventListener('click', () => {
+        if (view.bounds) map.fitBounds(view.bounds, { padding: 20 });
+        else map.flyTo({ center: view.center, zoom: view.zoom });
+      });
+      places.appendChild(button);
+    });
+
+    // Mentions légales : remontées au-dessus de l'attribution si elles la chevauchent
+    const mentions = document.querySelector('.mentions');
+    function placeMentions() {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (!attrib) return;
+      mentions.style.marginBottom = '';
+      const m = mentions.getBoundingClientRect();
+      const a = attrib.getBoundingClientRect();
+      const overlap = m.right > a.left && m.left < a.right && m.bottom > a.top && m.top < a.bottom;
+      if (overlap) mentions.style.marginBottom = `${Math.ceil(m.bottom - a.top) + 4}px`;
+    }
+    map.once('load', () => {
+      const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+      if (attrib) new ResizeObserver(placeMentions).observe(attrib);
+    });
+    window.addEventListener('resize', placeMentions);
+
+    // Indicateur de chargement : masqué quand les données GeoJSON sont chargées
+    const loading = document.getElementById('loading');
+    const SOURCES = ['communes', 'bassins', 'bassins-labels'];
+    const loaded = new Set();
+    map.on('sourcedata', (e) => {
+      if (SOURCES.includes(e.sourceId) && e.isSourceLoaded) {
+        loaded.add(e.sourceId);
+        if (loaded.size === SOURCES.length) loading.hidden = true;
+      }
+    });
+    map.on('error', (e) => {
+      if (SOURCES.includes(e.sourceId)) {
+        loading.hidden = false;
+        loading.textContent = 'Échec du chargement des données';
+        loading.classList.add('error');
+      }
+    });
+
+    map.on('load', () => {
+      map.addSource('communes', {
+        type: 'geojson', data: 'data/communes-vigne.geojson',
+        attribution: '© IGN – BD TOPO® (zones de végétation « Vigne »), ADMIN EXPRESS COG CARTO (communes)'
+      });
+      const AOP = 'Bassins AOP : data.gouv.fr, CC-BY, d’après l’INAO';
+      map.addSource('bassins', { type: 'geojson', data: 'data/bassins-aop.geojson', attribution: AOP });
+      map.addSource('bassins-labels', { type: 'geojson', data: 'data/bassins-aop-labels.geojson' });
+
+      // Couches thématiques insérées sous les libellés du fond
+      const firstSymbol = map.getStyle().layers.find(l => l.type === 'symbol');
+      const beforeId = firstSymbol ? firstSymbol.id : undefined;
+
+      const fillColor = ['step', ['get', 'part'], COLORS[0]];
+      BREAKS.forEach((b, i) => fillColor.push(b, COLORS[i + 1]));
+
+      map.addLayer({
+        id: 'communes-fill', type: 'fill', source: 'communes', maxzoom: 13.5,
+        paint: {
+          'fill-color': fillColor,
+          'fill-opacity': ['interpolate', ['linear'], ['zoom'], 11.5, 0.85, 12.5, 0.35, 13.5, 0]
+        }
+      }, beforeId);
+      map.addLayer({
+        id: 'communes-line', type: 'line', source: 'communes', minzoom: 8, maxzoom: 13.5,
+        paint: { 'line-color': '#ffffff', 'line-width': 0.5, 'line-opacity': 0.8 }
+      }, beforeId);
+
+      // Vignes de la BD TOPO : recoloration de la couche du fond Plan IGN
+      if (map.getLayer(VINE_LAYER)) {
+        map.setPaintProperty(VINE_LAYER, 'fill-color', VINE_COLOR);
+        map.setPaintProperty(VINE_LAYER, 'fill-opacity', 0.85);
+        map.moveLayer(VINE_LAYER, beforeId);
+      }
+
+      map.addLayer({
+        id: 'bassins-line', type: 'line', source: 'bassins', maxzoom: 11,
+        paint: {
+          'line-color': '#5c1a33', 'line-width': 1.2, 'line-dasharray': [3, 2],
+          'line-opacity': ['interpolate', ['linear'], ['zoom'], 9, 0.9, 11, 0]
+        }
+      }, beforeId);
+      map.addLayer({
+        id: 'bassins-fill', type: 'fill', source: 'bassins', maxzoom: 11,
+        paint: { 'fill-color': '#000', 'fill-opacity': 0 } // surface cliquable
+      }, beforeId);
+      map.addLayer({
+        id: 'bassins-label', type: 'symbol', source: 'bassins-labels', maxzoom: 9,
+        layout: {
+          'text-field': ['get', 'nom'],
+          'text-font': ['Source Sans Pro Bold'],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 5, 10, 8, 13],
+          'text-letter-spacing': 0.08, 'text-max-width': 8
+        },
+        paint: { 'text-color': '#5c1a33', 'text-halo-color': '#ffffff', 'text-halo-width': 1.5 }
+      });
+
+      const fmt = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+      const plural = (n, word) => `${fmt.format(n)} ${word}${n > 1 ? 's' : ''}`;
+      map.on('click', (e) => {
+        const z = map.getZoom();
+        const layer = z < 12.5 ? 'communes-fill' : VINE_LAYER;
+        const hit = map.getLayer(layer) && map.queryRenderedFeatures(e.point, { layers: [layer] })[0];
+        if (hit && layer === 'communes-fill') {
+          const p = hit.properties;
+          return new maplibregl.Popup().setLngLat(e.lngLat)
+            .setHTML(`<h3>${p.nom_officiel} (${p.code_insee})</h3>
+              Vigne : <strong>${fmt.format(p.surface_ha)} ha</strong><br>
+              Part de la commune : <strong>${fmt.format(p.part)} %</strong><br>
+              <small>${plural(p.n, 'zone')} de vigne (BD TOPO)</small>`)
+            .addTo(map);
+        }
+        if (hit) {
+          return new maplibregl.Popup().setLngLat(e.lngLat)
+            .setHTML('<h3>Vigne</h3><small>Zone de végétation « Vigne », © IGN – BD TOPO®</small>').addTo(map);
+        }
+        const bassin = z < 11 && map.queryRenderedFeatures(e.point, { layers: ['bassins-fill'] })[0];
+        if (bassin) {
+          new maplibregl.Popup().setLngLat(e.lngLat)
+            .setHTML(`<h3>${bassin.properties.nom}</h3><small>Grande région productrice de vins AOP (indicatif)</small>`)
+            .addTo(map);
+        }
+      });
+      map.on('mousemove', (e) => {
+        const layers = ['communes-fill', VINE_LAYER, 'bassins-fill'].filter(l => map.getLayer(l));
+        const hit = map.queryRenderedFeatures(e.point, { layers }).length > 0;
+        map.getCanvas().style.cursor = hit ? 'pointer' : '';
+      });
+    });
+  </script>
+</body>
+</html>
