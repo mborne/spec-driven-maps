@@ -36,29 +36,29 @@ Pour chaque lieu : nom, catégorie, adresse lorsqu'elle est connue, courte descr
 Éléments de contexte :
 
 - la **Gartempe**, tracée d'après la BD TOPO ;
-- l'**emprise de la Cité de l'Écrit** (quartier du Brouard), plutôt qu'un cercle ;
+- la **Cité de l'Écrit**, localisée par le quartier « Brouard » de la BD TOPO plutôt que par un cercle tracé à la main (aucune emprise de référence n'est disponible, voir « Décisions ») ;
 - un fond Plan IGN vecteur (sans orthophoto), avec un habillage « parchemin » repris de l'ancienne version.
 
 ## Critères d'acceptation
 
-- [ ] Les lieux des six catégories sont affichés, chacun avec un pictogramme propre à sa catégorie.
-- [ ] Chaque lieu est positionné d'après un objet BD TOPO, une notice Mérimée ou le géocodage de son adresse ; aucune coordonnée n'est saisie à la main.
-- [ ] Chaque monument historique recensé dans Mérimée dans l'emprise du centre-ville est affiché, avec son statut (classé / inscrit) et un lien vers sa notice.
-- [ ] Un lieu n'a le badge « MH » que s'il correspond à une notice Mérimée.
-- [ ] Chaque fiche indique la source de la donnée.
-- [ ] Aucun horaire n'est affiché ; les fiches des musées et de l'office de tourisme renvoient vers leur site officiel quand il existe.
-- [ ] La Gartempe et l'emprise de la Cité de l'Écrit proviennent de données de référence, pas d'un tracé manuel.
-- [ ] Une légende présente les catégories et le badge « MH ».
-- [ ] Sur ordinateur, un panneau latéral liste les lieux par catégorie ; un clic sur un lieu centre la carte et ouvre sa fiche.
-- [ ] Sur smartphone, la carte occupe l'écran et la liste est accessible dans une fiche repliable qui ne masque pas la carte.
-- [ ] Une seule popup est ouverte à la fois.
-- [ ] L'habillage « parchemin » (polices, couleurs, cadre) est repris de l'ancienne version, sans gêner la lecture sur smartphone.
-- [ ] Le fond de carte est le Plan IGN vecteur, rendu avec MapLibre GL JS ; il n'y a pas de choix d'orthophoto.
-- [ ] La vue initiale et l'emprise des données couvrent le centre-ville.
-- [ ] Les sources sont attribuées (IGN – BD TOPO®, Plan IGN, ministère de la Culture – Mérimée, Géoplateforme pour le géocodage).
-- [ ] « GitHub / Mentions légales » est centré en bas de carte, séparé des attributions (convention commune, voir le [README](../../README.md)).
-- [ ] Les données sont produites par un script et versionnées dans `data/` (aucune donnée codée en dur dans la page).
-- [ ] La carte est un site statique publiable sur GitHub Pages (aucun serveur applicatif).
+- [x] Les lieux des six catégories sont affichés, chacun avec un pictogramme propre à sa catégorie.
+- [x] Chaque lieu est positionné d'après un objet BD TOPO, une notice Mérimée ou le géocodage de son adresse ; aucune coordonnée n'est saisie à la main.
+- [x] Chaque monument historique recensé dans Mérimée dans l'emprise du centre-ville est affiché, avec son statut (classé / inscrit) et un lien vers sa notice.
+- [x] Un lieu n'a le badge « MH » que s'il correspond à une notice Mérimée.
+- [x] Chaque fiche indique la source de la donnée.
+- [x] Aucun horaire n'est affiché ; les fiches des musées et de l'office de tourisme renvoient vers leur site officiel quand il existe.
+- [x] La Gartempe et la Cité de l'Écrit proviennent de données de référence, pas d'un tracé manuel.
+- [x] Une légende présente les catégories et le badge « MH ».
+- [x] Sur ordinateur, un panneau latéral liste les lieux par catégorie ; un clic sur un lieu centre la carte et ouvre sa fiche.
+- [x] Sur smartphone, la carte occupe l'écran et la liste est accessible dans une fiche repliable qui ne masque pas la carte.
+- [x] Une seule popup est ouverte à la fois.
+- [x] L'habillage « parchemin » (polices, couleurs, cadre) est repris de l'ancienne version, sans gêner la lecture sur smartphone.
+- [x] Le fond de carte est le Plan IGN vecteur, rendu avec MapLibre GL JS ; il n'y a pas de choix d'orthophoto.
+- [x] La vue initiale et l'emprise des données couvrent le centre-ville.
+- [x] Les sources sont attribuées (IGN – BD TOPO®, Plan IGN, ministère de la Culture – Mérimée, Géoplateforme pour le géocodage).
+- [x] « GitHub / Mentions légales » est centré en bas de carte, séparé des attributions (convention commune, voir le [README](../../README.md)).
+- [x] Les données sont produites par un script et versionnées dans `data/` (aucune donnée codée en dur dans la page).
+- [x] La carte est un site statique publiable sur GitHub Pages (aucun serveur applicatif).
 
 ## Hors périmètre
 
@@ -84,3 +84,4 @@ Pour chaque lieu : nom, catégorie, adresse lorsqu'elle est connue, courte descr
 | Orthophoto | Non : Plan IGN seul, teintable pour s'accorder au parchemin |
 | Horaires | Non affichés ; lien vers le site officiel du lieu quand il existe |
 | Emprise | Centre-ville seul ; monuments éloignés exclus |
+| Emprise de la Cité de l'Écrit | Pas d'emprise de référence : le quartier « Brouard » de la BD TOPO ne mesure que 9 m × 6 m. La Cité de l'Écrit est figurée par un point, sans cercle ni tracé manuel |
