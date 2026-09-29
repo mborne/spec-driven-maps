@@ -1,0 +1,926 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.869201,
+     46.424964
+    ]
+   },
+   "properties": {
+    "categorie": "lieu",
+    "nom": "Festival Printemps des Cartes",
+    "adresse": "16 Rue des Recollets 86500 Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.87374,
+     46.417496
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000054253863",
+    "distance_m": 1202,
+    "duree_min": 22,
+    "vol_oiseau_m": 896,
+    "categorie": "gare",
+    "nom": "Gare de Montmorillon",
+    "adresse": "130 Avenue du Général de Gaulle, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.86824,
+     46.424973
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198167",
+    "distance_m": 84,
+    "duree_min": 1,
+    "vol_oiseau_m": 74,
+    "categorie": "parking",
+    "nom": "Parking rue du Four",
+    "adresse": "Rue du Four, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.868559,
+     46.42599
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198148",
+    "distance_m": 212,
+    "duree_min": 3,
+    "vol_oiseau_m": 124,
+    "categorie": "parking",
+    "nom": "Parking place du Maréchal Leclerc",
+    "adresse": "Place du Maréchal Leclerc, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.869285,
+     46.423511
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000002478802747",
+    "distance_m": 267,
+    "duree_min": 5,
+    "vol_oiseau_m": 161,
+    "categorie": "parking",
+    "nom": "Parking boulevard de Strasbourg",
+    "adresse": "Boulevard de Strasbourg, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.871127,
+     46.426558
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198217",
+    "distance_m": 320,
+    "duree_min": 5,
+    "vol_oiseau_m": 230,
+    "categorie": "parking",
+    "nom": "Parking rue Saint-Martial",
+    "adresse": "Rue Saint-Martial, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.867336,
+     46.426837
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000242611945",
+    "distance_m": 391,
+    "duree_min": 6,
+    "vol_oiseau_m": 252,
+    "categorie": "parking",
+    "nom": "Parking rue Puits Cornet",
+    "adresse": "Rue Puits Cornet, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.869031,
+     46.428047
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000242611931",
+    "distance_m": 411,
+    "duree_min": 7,
+    "vol_oiseau_m": 341,
+    "categorie": "parking",
+    "nom": "Parking boulevard Gambetta",
+    "adresse": "Boulevard Gambetta, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.866346,
+     46.424483
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198198",
+    "distance_m": 450,
+    "duree_min": 7,
+    "vol_oiseau_m": 225,
+    "categorie": "parking",
+    "nom": "Parking Cité de l'Écrit (rue Fontaine de l'Ecole)",
+    "adresse": "Rue Fontaine de l'Ecole, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.867886,
+     46.423358
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198214",
+    "distance_m": 573,
+    "duree_min": 9,
+    "vol_oiseau_m": 204,
+    "categorie": "parking",
+    "nom": "Parking Cité de l'Écrit (rue Léon Dardant)",
+    "adresse": "Rue Léon Dardant, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.877316,
+     46.431889
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198066",
+    "distance_m": 1131,
+    "duree_min": 19,
+    "vol_oiseau_m": 987,
+    "categorie": "parking",
+    "nom": "Parking rue des Volliboeufs",
+    "adresse": "Rue des Volliboeufs, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.880211,
+     46.432067
+    ]
+   },
+   "properties": {
+    "cleabs": "EQ_RESEA0000000130198169",
+    "distance_m": 1405,
+    "duree_min": 23,
+    "vol_oiseau_m": 1154,
+    "categorie": "parking",
+    "nom": "Parking boulevard du Terrier Blanc",
+    "adresse": "Boulevard du Terrier Blanc, Montmorillon"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.869177,
+        46.423693
+       ],
+       [
+        0.869162,
+        46.423707
+       ],
+       [
+        0.869111,
+        46.423677
+       ],
+       [
+        0.86908,
+        46.423621
+       ],
+       [
+        0.869131,
+        46.423529
+       ],
+       [
+        0.869391,
+        46.42332
+       ],
+       [
+        0.869444,
+        46.423338
+       ],
+       [
+        0.869494,
+        46.42345
+       ],
+       [
+        0.869177,
+        46.423693
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000002478802747"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.877323,
+        46.432115
+       ],
+       [
+        0.877115,
+        46.43183
+       ],
+       [
+        0.877194,
+        46.431724
+       ],
+       [
+        0.877278,
+        46.431742
+       ],
+       [
+        0.877544,
+        46.43183
+       ],
+       [
+        0.877323,
+        46.432115
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198066"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.868653,
+        46.425812
+       ],
+       [
+        0.868731,
+        46.425935
+       ],
+       [
+        0.868814,
+        46.426086
+       ],
+       [
+        0.868611,
+        46.426148
+       ],
+       [
+        0.868416,
+        46.426107
+       ],
+       [
+        0.868365,
+        46.426044
+       ],
+       [
+        0.868285,
+        46.42592
+       ],
+       [
+        0.868549,
+        46.425845
+       ],
+       [
+        0.868653,
+        46.425812
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198148"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.868302,
+        46.425144
+       ],
+       [
+        0.868029,
+        46.425049
+       ],
+       [
+        0.868138,
+        46.424887
+       ],
+       [
+        0.868235,
+        46.424808
+       ],
+       [
+        0.868433,
+        46.424876
+       ],
+       [
+        0.868302,
+        46.425144
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198167"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.879999,
+        46.432732
+       ],
+       [
+        0.879706,
+        46.432584
+       ],
+       [
+        0.879682,
+        46.432538
+       ],
+       [
+        0.880368,
+        46.431448
+       ],
+       [
+        0.88078,
+        46.431563
+       ],
+       [
+        0.879999,
+        46.432732
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198169"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.866544,
+        46.42461
+       ],
+       [
+        0.866368,
+        46.424707
+       ],
+       [
+        0.866055,
+        46.424462
+       ],
+       [
+        0.866085,
+        46.424319
+       ],
+       [
+        0.866639,
+        46.424371
+       ],
+       [
+        0.866544,
+        46.42461
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198198"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.868005,
+        46.423594
+       ],
+       [
+        0.867451,
+        46.42329
+       ],
+       [
+        0.867533,
+        46.423223
+       ],
+       [
+        0.867645,
+        46.423278
+       ],
+       [
+        0.867827,
+        46.423138
+       ],
+       [
+        0.868262,
+        46.423367
+       ],
+       [
+        0.868005,
+        46.423594
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198214"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.871183,
+        46.426974
+       ],
+       [
+        0.871133,
+        46.42711
+       ],
+       [
+        0.870917,
+        46.427076
+       ],
+       [
+        0.871025,
+        46.426485
+       ],
+       [
+        0.871086,
+        46.426029
+       ],
+       [
+        0.87133,
+        46.426043
+       ],
+       [
+        0.871284,
+        46.426454
+       ],
+       [
+        0.871226,
+        46.426572
+       ],
+       [
+        0.871183,
+        46.426974
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000130198217"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.869069,
+        46.428361
+       ],
+       [
+        0.868894,
+        46.428074
+       ],
+       [
+        0.868769,
+        46.427844
+       ],
+       [
+        0.868969,
+        46.427777
+       ],
+       [
+        0.868997,
+        46.427818
+       ],
+       [
+        0.869145,
+        46.427809
+       ],
+       [
+        0.869151,
+        46.428028
+       ],
+       [
+        0.869256,
+        46.428304
+       ],
+       [
+        0.869069,
+        46.428361
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000242611931"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        0.867489,
+        46.427028
+       ],
+       [
+        0.867418,
+        46.427046
+       ],
+       [
+        0.867183,
+        46.426628
+       ],
+       [
+        0.867239,
+        46.426612
+       ],
+       [
+        0.867489,
+        46.427028
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "parking-emprise",
+    "cleabs": "EQ_RESEA0000000242611945"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      0.874007,
+      46.417658
+     ],
+     [
+      0.873804,
+      46.417817
+     ],
+     [
+      0.873433,
+      46.418091
+     ],
+     [
+      0.873186,
+      46.41828
+     ],
+     [
+      0.87316,
+      46.418316
+     ],
+     [
+      0.873141,
+      46.418372
+     ],
+     [
+      0.873125,
+      46.41848
+     ],
+     [
+      0.872876,
+      46.418661
+     ],
+     [
+      0.872774,
+      46.418735
+     ],
+     [
+      0.872359,
+      46.419029
+     ],
+     [
+      0.872274,
+      46.419092
+     ],
+     [
+      0.872207,
+      46.419143
+     ],
+     [
+      0.871805,
+      46.41944
+     ],
+     [
+      0.87131,
+      46.4198
+     ],
+     [
+      0.871216,
+      46.419868
+     ],
+     [
+      0.870654,
+      46.420274
+     ],
+     [
+      0.870156,
+      46.420631
+     ],
+     [
+      0.869951,
+      46.420785
+     ],
+     [
+      0.869718,
+      46.420959
+     ],
+     [
+      0.869652,
+      46.421006
+     ],
+     [
+      0.869614,
+      46.421034
+     ],
+     [
+      0.869317,
+      46.421249
+     ],
+     [
+      0.868788,
+      46.421641
+     ],
+     [
+      0.868524,
+      46.421829
+     ],
+     [
+      0.868408,
+      46.421912
+     ],
+     [
+      0.868251,
+      46.422027
+     ],
+     [
+      0.867983,
+      46.422224
+     ],
+     [
+      0.867634,
+      46.422472
+     ],
+     [
+      0.867742,
+      46.422524
+     ],
+     [
+      0.867816,
+      46.422556
+     ],
+     [
+      0.867889,
+      46.422596
+     ],
+     [
+      0.867915,
+      46.422617
+     ],
+     [
+      0.867935,
+      46.422645
+     ],
+     [
+      0.868037,
+      46.422673
+     ],
+     [
+      0.868415,
+      46.422829
+     ],
+     [
+      0.868789,
+      46.422986
+     ],
+     [
+      0.869074,
+      46.423111
+     ],
+     [
+      0.869357,
+      46.423234
+     ],
+     [
+      0.869634,
+      46.42337
+     ],
+     [
+      0.869646,
+      46.423373
+     ],
+     [
+      0.869477,
+      46.423532
+     ],
+     [
+      0.86926,
+      46.423697
+     ],
+     [
+      0.86923,
+      46.423719
+     ],
+     [
+      0.869065,
+      46.423838
+     ],
+     [
+      0.868963,
+      46.42391
+     ],
+     [
+      0.868697,
+      46.42411
+     ],
+     [
+      0.868591,
+      46.424205
+     ],
+     [
+      0.868641,
+      46.424235
+     ],
+     [
+      0.86875,
+      46.424294
+     ],
+     [
+      0.868776,
+      46.424327
+     ],
+     [
+      0.868774,
+      46.42435
+     ],
+     [
+      0.868749,
+      46.424389
+     ],
+     [
+      0.868648,
+      46.424541
+     ],
+     [
+      0.868594,
+      46.424624
+     ],
+     [
+      0.868455,
+      46.424912
+     ],
+     [
+      0.868448,
+      46.424928
+     ],
+     [
+      0.868864,
+      46.425096
+     ],
+     [
+      0.869017,
+      46.425147
+     ],
+     [
+      0.869153,
+      46.424948
+     ]
+    ]
+   },
+   "properties": {
+    "categorie": "itineraire",
+    "distance_m": 1202,
+    "duree_min": 22
+   }
+  }
+ ]
+}

@@ -19,7 +19,7 @@ L'idée consiste à expérimenter la méthode [Specification-Driven Development 
 | Dossier | Description | Statut |
 |---|---|---|
 | [commune-doubs](commune-doubs/) | Densité de population des communes du Doubs | exemple de départ |
-| montmorillon-acces | Carte d'accès au Printemps des Cartes | à venir |
+| [montmorillon-acces](montmorillon-acces/) | Carte d'accès au Printemps des Cartes 2026 | réalisée |
 | montmorillon-tourisme | Carte touristique de Montmorillon | à venir |
 | montmorillon-bdtopo-3d | Carte des bâtiments de Montmorillon en 3D | à venir |
 
