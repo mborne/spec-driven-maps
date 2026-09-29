@@ -28,7 +28,7 @@ Toutes les cartes respectent les règles suivantes :
 |---|---|---|
 | [commune-doubs](commune-doubs/) | Densité de population des communes du Doubs | exemple de départ |
 | [montmorillon-acces](montmorillon-acces/) | Carte d'accès au Printemps des Cartes 2026 | réalisée |
-| montmorillon-tourisme | Carte touristique de Montmorillon | à venir |
+| [montmorillon-tourisme](montmorillon-tourisme/) | Carte touristique de Montmorillon ([#15](https://github.com/mborne/spec-driven-maps/issues/15)) | spécifications |
 | montmorillon-bdtopo-3d | Carte des bâtiments de Montmorillon en 3D | à venir |
 
 Référence : <https://mborne.github.io/montmorillon/>
