@@ -18,7 +18,7 @@ Nouvelle version, conçue selon la méthode [spec-driven-maps](../README.md), de
 - Fond Plan IGN vecteur (style standard), rendu MapLibre GL JS.
 - Sources : © IGN – BD TOPO® (`BDTOPO_V3:equipement_de_transport`), Géoplateforme (géocodage, itinéraire).
 - Une seule popup ouverte à la fois.
-- Lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) centré en bas de carte, séparé des attributions.
+- « [GitHub](https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-acces#readme) / [Mentions légales](https://mborne.github.io/mentions-legales/) » centré en bas de carte, séparé des attributions.
 
 ## Méthode
 
@@ -64,7 +64,8 @@ Rendu :
   pour le doigt.
 - Une seule popup ouverte à la fois (ouvrir un détail ferme le précédent).
 - Attribution des sources (© IGN – BD TOPO®, Géoplateforme) et, centré en bas de carte et séparé
-  des attributions, un lien vers les mentions légales : https://mborne.github.io/mentions-legales/
+  des attributions, « GitHub / Mentions légales » avec des liens vers
+  https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-acces#readme et https://mborne.github.io/mentions-legales/
 ```
 
 ## Régénérer les données

@@ -9,6 +9,8 @@
 - [x] Afficher un message pendant le chargement des communes (et en cas d'échec)
 - [x] Ajouter le lien vers les mentions légales en bas de carte
 - [x] Centrer les mentions légales en bas de carte, séparées des attributions
+- [x] Ajouter le lien « GitHub » vers le dépôt à côté des mentions légales
+- [x] Faire pointer le lien « GitHub » vers le README de la carte
 - [x] Tester localement : `python3 -m http.server -d commune-doubs 8000`
 - [x] Vérifier les critères d'acceptation de `spec.md`
 - [ ] Publier sur GitHub Pages

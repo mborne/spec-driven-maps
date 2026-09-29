@@ -13,5 +13,7 @@
 - [x] Vérifier les critères d'acceptation de `spec.md` (sauf ouverture réelle des applications de navigation)
 - [x] Rédiger `README.md` (carte, méthode, prompt équivalent)
 - [x] Centrer les mentions légales en bas de carte, séparées des attributions
+- [x] Ajouter le lien « GitHub » vers le dépôt à côté des mentions légales
+- [x] Faire pointer le lien « GitHub » vers le README de la carte
 - [x] N'ouvrir qu'une popup à la fois
 - [ ] Publier sur GitHub Pages

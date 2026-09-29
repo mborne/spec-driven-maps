@@ -27,6 +27,7 @@ Grand public et agents souhaitant une lecture rapide du peuplement du départeme
 - [x] Un clic sur une commune affiche son nom, son code INSEE, sa population, sa superficie et sa densité.
 - [x] Les sources sont attribuées (IGN BD TOPO®, Insee).
 - [x] Un lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) couvrant `mborne.github.io` est centré en bas de carte, séparé des attributions des sources.
+- [x] Un lien « GitHub » vers le [README de la carte](https://github.com/mborne/spec-driven-maps/tree/main/commune-doubs#readme) dans le dépôt figure à côté des mentions légales (« GitHub / Mentions légales »).
 - [x] La carte est utilisable sur mobile.
 - [x] Les contours des communes sont simplifiés pour un affichage web rapide, sans trou ni chevauchement entre communes voisines.
 - [x] La carte est un site statique publiable sur GitHub Pages (aucun serveur applicatif).

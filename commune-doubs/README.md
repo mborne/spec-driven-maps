@@ -11,7 +11,7 @@ C'est l'exemple de départ, volontairement simple, qui pose le cadre de [spec-dr
 - Un clic sur une commune affiche sa population, sa superficie et sa densité.
 - Fond Plan IGN vecteur en niveaux de gris, rendu MapLibre GL JS.
 - Sources : © IGN – BD TOPO® (`BDTOPO_V3:commune`), population municipale Insee.
-- Lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) centré en bas de carte, séparé des attributions.
+- « [GitHub](https://github.com/mborne/spec-driven-maps/tree/main/commune-doubs#readme) / [Mentions légales](https://mborne.github.io/mentions-legales/) » centré en bas de carte, séparé des attributions.
 
 ## Méthode
 
@@ -51,8 +51,8 @@ Rendu :
 - Un message « Chargement des communes… » pendant le chargement des données, et un message
   en cas d'échec.
 - Attribution des sources (© IGN – BD TOPO® / Insee, population municipale) et, centré en bas
-  de carte et séparé des attributions, un lien vers les mentions légales :
-  https://mborne.github.io/mentions-legales/
+  de carte et séparé des attributions, « GitHub / Mentions légales » avec des liens vers
+  https://github.com/mborne/spec-driven-maps/tree/main/commune-doubs#readme et https://mborne.github.io/mentions-legales/
 - La carte doit être utilisable sur mobile.
 ```
 

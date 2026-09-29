@@ -18,7 +18,9 @@ L'idée consiste à expérimenter la méthode [Specification-Driven Development 
 
 Toutes les cartes respectent les règles suivantes :
 
-- **Mentions légales** : un lien vers <https://mborne.github.io/mentions-legales/> est centré en bas de la carte, séparé des attributions des sources (qui restent dans le contrôle d'attribution MapLibre, en bas à droite).
+- **Pied de carte** : « GitHub / Mentions légales » est centré en bas de la carte, séparé des attributions des sources (qui restent dans le contrôle d'attribution MapLibre, en bas à droite) :
+  - « GitHub » renvoie vers le README de la carte dans le dépôt : `https://github.com/mborne/spec-driven-maps/tree/main/<dossier>#readme` ;
+  - « Mentions légales » renvoie vers <https://mborne.github.io/mentions-legales/>.
 
 ## Cartes
 

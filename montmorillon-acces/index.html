@@ -75,11 +75,11 @@
       padding: 1px 7px; font-size: 12px; font-weight: 600; white-space: nowrap; pointer-events: none;
     }
 
-    /* Mentions légales : centrées en bas de carte, séparées des attributions */
+    /* Pied de carte (GitHub / Mentions légales) : centré en bas, séparé des attributions */
     .mentions {
       position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 1;
       background: rgba(255, 255, 255, 0.85); padding: 2px 8px; border-radius: 4px;
-      font-size: 12px; white-space: nowrap;
+      font-size: 12px; white-space: nowrap; color: #666;
     }
     .mentions a { color: #333; }
     .maplibregl-popup-content { font-size: 13px; padding: 10px 12px; }
@@ -142,7 +142,7 @@
     </div>
   </section>
 
-  <div class="mentions"><a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
+  <div class="mentions"><a href="https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-acces#readme" target="_blank" rel="noopener">GitHub</a> / <a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a></div>
   <div class="loading" id="loading" role="status" aria-live="polite">Chargement des données d'accès…</div>
 
   <script>
@@ -207,7 +207,7 @@
     const mobile = window.matchMedia('(max-width: 700px)');
     if (!mobile.matches) { fiche.classList.remove('repliee'); poignee.setAttribute('aria-expanded', 'true'); }
     function padding() {
-      if (mobile.matches) return { top: 40, right: 50, left: 30, bottom: fiche.offsetHeight + 20 };
+      if (mobile.matches) return { top: 40, right: 50, left: 30, bottom: fiche.offsetHeight + 50 };  // + pied de carte
       return { top: 40, right: 60, bottom: 40, left: fiche.offsetWidth + 40 };
     }
     function updateFicheHeight() {

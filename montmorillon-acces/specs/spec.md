@@ -46,6 +46,7 @@ Visiteurs du festival (grand public, scolaires, professionnels de la géographie
 - [x] La carte est utilisable sur smartphone : fiche lisible, boutons assez grands pour le doigt, carte non masquée par la fiche.
 - [x] Les sources sont attribuées (IGN, BD TOPO®, Géoplateforme).
 - [x] Un lien vers les [mentions légales](https://mborne.github.io/mentions-legales/) est centré en bas de carte, séparé des attributions des sources ; sur mobile, il reste visible au-dessus de la fiche.
+- [x] Un lien « GitHub » vers le [README de la carte](https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-acces#readme) dans le dépôt figure à côté des mentions légales (« GitHub / Mentions légales »).
 - [x] La carte est un site statique publiable sur GitHub Pages (aucun serveur applicatif).
 
 ## Hors périmètre

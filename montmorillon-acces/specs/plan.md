@@ -84,7 +84,7 @@ Les données sont figées dans le dépôt : la carte ne dépend pas des services
   - ordinateur ou repli : `https://www.google.com/maps/dir/?api=1&destination=<lat>,<lon>`.
 - **Popups** : une seule popup à la fois. La page garde une référence à la popup ouverte et la ferme avant d'en ouvrir une autre, que l'ouverture vienne d'un marqueur ou de la liste de la fiche.
 - Attribution : © IGN – BD TOPO®, Plan IGN, Géoplateforme (géocodage et itinéraire), dans le contrôle d'attribution MapLibre.
-- Mentions légales : lien dans un bloc distinct, centré en bas de carte (convention commune, voir le [README](../../README.md)). Sur mobile, il est placé juste au-dessus de la fiche ; si l'attribution déployée le chevauche, il est remonté au-dessus d'elle.
+- Pied de carte « GitHub / Mentions légales » : liens vers le README de la carte dans le dépôt (`https://github.com/mborne/spec-driven-maps/tree/main/montmorillon-acces#readme`) et vers les mentions légales, dans un bloc distinct, centré en bas de carte (convention commune, voir le [README](../../README.md)). Sur mobile, le bloc est placé juste au-dessus de la fiche ; si l'attribution déployée le chevauche, il est remonté au-dessus d'elle.
 
 ## Hébergement
 
