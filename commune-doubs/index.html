@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Densité de population – Doubs</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.css">
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; background: #fff; }
+    #map { position: absolute; inset: 0; }
+    .panel {
+      position: absolute; top: 10px; left: 10px; z-index: 1;
+      background: rgba(255, 255, 255, 0.92); padding: 10px 12px; border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); max-width: calc(100vw - 80px);
+    }
+    .panel h1 { font-size: 16px; margin: 0 0 4px; }
+    .panel p { font-size: 12px; margin: 0 0 8px; color: #444; }
+    .legend { font-size: 12px; }
+    .legend div { display: flex; align-items: center; gap: 6px; line-height: 18px; }
+    .legend span { display: inline-block; width: 16px; height: 12px; border: 1px solid #999; }
+    @media (max-width: 500px) {
+      .panel { padding: 6px 8px; }
+      .panel h1 { font-size: 13px; }
+      .panel p { display: none; }
+      .legend { font-size: 11px; }
+      .legend div { line-height: 15px; }
+    }
+    .loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+      background: rgba(255, 255, 255, 0.92); padding: 8px 14px; border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); font-size: 14px;
+    }
+    .loading.error { color: #b10026; }
+    .loading[hidden] { display: none; }
+    .maplibregl-popup-content { font-size: 13px; }
+    .maplibregl-popup-content h2 { font-size: 14px; margin: 0 0 4px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="panel">
+    <h1>Densité de population des communes du Doubs</h1>
+    <p>Habitants par km² – population municipale Insee</p>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="loading" id="loading" role="status" aria-live="polite">Chargement des communes…</div>
+  <script>
+    // Classes de densité (hab/km²) et couleurs (rampe séquentielle YlOrRd)
+    const BREAKS = [25, 50, 100, 250, 500, 1000];
+    const COLORS = ['#ffffb2', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#b10026'];
+
+    const legend = document.getElementById('legend');
+    COLORS.forEach((color, i) => {
+      const label = i === 0 ? `< ${BREAKS[0]}`
+        : i === BREAKS.length ? `≥ ${BREAKS[i - 1]}`
+        : `${BREAKS[i - 1]} – ${BREAKS[i]}`;
+      legend.insertAdjacentHTML('beforeend', `<div><span style="background:${color}"></span>${label}</div>`);
+    });
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://data.geopf.fr/annexes/ressources/vectorTiles/styles/PLAN.IGN/gris.json',
+      bounds: [5.69868, 46.5538, 7.06239, 47.57969],
+      fitBoundsOptions: { padding: 20 },
+      attributionControl: {
+        customAttribution: '<a href="https://mborne.github.io/mentions-legales/" target="_blank" rel="noopener">Mentions légales</a>'
+      }
+    });
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    // Indicateur de chargement des données communales (~0,5 Mo)
+    const loading = document.getElementById('loading');
+    map.on('sourcedata', (e) => {
+      if (e.sourceId === 'communes' && e.isSourceLoaded) loading.hidden = true;
+    });
+    map.on('error', (e) => {
+      if (e.sourceId === 'communes') {
+        loading.textContent = 'Échec du chargement des communes';
+        loading.classList.add('error');
+      }
+    });
+
+    map.on('load', () => {
+      map.addSource('communes', {
+        type: 'geojson',
+        data: 'data/communes-doubs.geojson',
+        attribution: '© IGN – BD TOPO® / Insee, population municipale'
+      });
+
+      // Insère les communes sous les libellés du fond de carte
+      const firstSymbol = map.getStyle().layers.find(l => l.type === 'symbol');
+      const beforeId = firstSymbol ? firstSymbol.id : undefined;
+
+      const fillColor = ['step', ['get', 'densite'], COLORS[0]];
+      BREAKS.forEach((b, i) => fillColor.push(b, COLORS[i + 1]));
+
+      map.addLayer({
+        id: 'communes-fill', type: 'fill', source: 'communes',
+        paint: { 'fill-color': fillColor, 'fill-opacity': 0.75 }
+      }, beforeId);
+      map.addLayer({
+        id: 'communes-line', type: 'line', source: 'communes',
+        paint: { 'line-color': '#ffffff', 'line-width': 0.5 }
+      }, beforeId);
+
+      const fmt = new Intl.NumberFormat('fr-FR');
+      map.on('click', 'communes-fill', (e) => {
+        const p = e.features[0].properties;
+        new maplibregl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`<h2>${p.nom_officiel} (${p.code_insee})</h2>
+            Population : ${fmt.format(p.population)} hab.<br>
+            Superficie : ${fmt.format(p.superficie_cadastrale / 100)} km²<br>
+            <strong>Densité : ${fmt.format(p.densite)} hab/km²</strong><br>
+            <small>Recensement ${p.date_du_recensement.slice(0, 4)}</small>`)
+          .addTo(map);
+      });
+      map.on('mouseenter', 'communes-fill', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'communes-fill', () => { map.getCanvas().style.cursor = ''; });
+    });
+  </script>
+</body>
+</html>
